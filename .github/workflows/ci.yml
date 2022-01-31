@@ -62,4 +62,11 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
         
       - name: Deploy with rsync
-        run: rsync -avzn ./.nuxt/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/sites/portfolio2022.timotheedurand.fr/
+        #run: rsync -avzn .nuxt ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/sites/portfolio2022.timotheedurand.fr/
+        run: 
+          echo "ls github"
+          ls
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
+          cd /sites/portfolio2022.timotheedurand.fr/
+          echo "ls server"
+          ls
