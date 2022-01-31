@@ -48,21 +48,21 @@ jobs:
       - name: Run linter 👀
         run: yarn lintfix
 
-      - name : Generate static site
+      - name : Generate static site 🎡
         run: yarn generate
 
 
-      - name: Install SSH Key
+      - name: Install SSH Key 🔐
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_KEY }} 
           known_hosts: 'placeholder'
           
-      - name: Adding Known Hosts
+      - name: Adding Known Hosts 📄
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
         
-      - name: Deploy with rsync
-        run: rsync -avzn ./dist ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:sites/portfolio2022.timotheedurand.fr
+      - name: Deploy to portfolio2022.timotheedurand.fr 😄
+        run: rsync -avz ./dist ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:sites/portfolio2022.timotheedurand.fr
         #run: |
          # echo "ls github"
          # ls
