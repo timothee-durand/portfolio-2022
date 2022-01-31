@@ -67,6 +67,6 @@ jobs:
           echo "ls github"
           ls
           echo "ls server"
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} /bin/bash ls
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} ls -l
      
           
