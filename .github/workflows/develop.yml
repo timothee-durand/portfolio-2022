@@ -2,10 +2,12 @@ name: deploy_staging
 
 on:
   push:
-    branches: -develop
+    branches: 
+      -develop
       -main
   pull_request:
-    branches: -develop
+    branches: 
+      -develop
       -main
 
 jobs:
@@ -42,9 +44,6 @@ jobs:
 
       - name: Install dependencies 👨🏻‍💻
         run: yarn
-
-      - name: Run linter 👀
-        run: yarn lint
 
       - name: Generate static site 🎡
         run: yarn generate
