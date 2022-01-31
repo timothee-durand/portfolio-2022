@@ -64,9 +64,9 @@ jobs:
       - name: Deploy with rsync
         #run: rsync -avzn .nuxt ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/sites/portfolio2022.timotheedurand.fr/
         run: |
+          yarn generate
           echo "ls github"
           ls
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
-          cd /sites/portfolio2022.timotheedurand.fr/
           echo "ls server"
           ls
