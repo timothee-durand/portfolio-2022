@@ -46,4 +46,10 @@ jobs:
         run: yarn
 
       - name: Run linter 👀
-        run: yarn lint
+        run: yarn lintfix
+
+      - name : Generate static site
+        run: yarn generate
+
+
+
