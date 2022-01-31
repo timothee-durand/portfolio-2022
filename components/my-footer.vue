@@ -1,15 +1,13 @@
 <template>
-<footer>
-  <p>Copyright moi</p>
-</footer>
+  <footer>
+    <p>Copyright moi</p>
+  </footer>
 </template>
 
 <script>
 export default {
-  name: "my-footer"
-};
+  name: 'my-footer',
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

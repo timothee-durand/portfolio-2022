@@ -2,11 +2,9 @@ name: deploy_staging
 
 on:
   push:
-    branches:
-      -develop
+    branches: -develop
   pull_request:
-    branches:
-      -develop
+    branches: -develop
 
 jobs:
   deploy_staging:
@@ -46,9 +44,8 @@ jobs:
       - name: Run linter 👀
         run: yarn lint
 
-      - name : Generate static site 🎡
+      - name: Generate static site 🎡
         run: yarn generate
-
 
       - name: Install SSH Key 🔐
         uses: shimataro/ssh-key-action@v2
@@ -61,6 +58,3 @@ jobs:
 
       - name: Deploy to portfolio2022.timotheedurand.fr 😄
         run: rsync -avz ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:sites/portfolio2022.timotheedurand.fr
-
-
-
