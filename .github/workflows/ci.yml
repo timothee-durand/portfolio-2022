@@ -62,7 +62,7 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
         
       - name: Deploy to portfolio2022.timotheedurand.fr 😄
-        run: rsync -avz ./dist ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:sites/portfolio2022.timotheedurand.fr
+        run: rsync -avz ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:sites/portfolio2022.timotheedurand.fr
         #run: |
          # echo "ls github"
          # ls
