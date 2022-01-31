@@ -67,6 +67,6 @@ jobs:
           echo "ls github"
           ls
           echo "ls server"
-          ssh -t -t ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} && ls
+          ssh -t -t ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} / ls
      
           
