@@ -1,6 +1,7 @@
 <template>
   <article>
     <h1>Projets</h1>
+    <p>test</p>
     <ul>
       <li v-for="(project, i) in projects" :key="`project-${i}`">
         <nuxt-link :to="project.path">
