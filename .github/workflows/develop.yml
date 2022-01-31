@@ -3,15 +3,13 @@ name: ci
 on:
   push:
     branches:
-      - main
-      - master
+      -develop
   pull_request:
     branches:
-      - main
-      - master
+       -develop
 
 jobs:
-  ci:
+  deploy_staging:
     runs-on: ${{ matrix.os }}
 
     strategy:
