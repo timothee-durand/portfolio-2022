@@ -1,12 +1,7 @@
 name: ci
 
 on:
-  push:
-    branches:
-      -develop
-  pull_request:
-    branches:
-       -develop
+  workflow_dispatch
 
 jobs:
   deploy_staging:
@@ -14,8 +9,8 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        node: [14]
+        os: [ ubuntu-latest ]
+        node: [ 14 ]
 
     steps:
       - name: Checkout 🛎
@@ -46,7 +41,7 @@ jobs:
       - name: Run linter 👀
         run: yarn lint
 
-      - name : Generate static site 🎡
+      - name: Generate static site 🎡
         run: yarn generate
 
 
@@ -59,12 +54,7 @@ jobs:
       - name: Adding Known Hosts 📄
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy to portfolio2022.timotheedurand.fr 😄
-        run: rsync -avz ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:sites/portfolio2022.timotheedurand.fr
-        #run: |
-         # echo "ls github"
-         # ls
-         # echo "ls server"
-        #  ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} ls -l sites/portfolio2022.timotheedurand.fr
+      - name: Deploy to timotheedurand.fr 😄
+        run: rsync -avz ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:web
 
 
