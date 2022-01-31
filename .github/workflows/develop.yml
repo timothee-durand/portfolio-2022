@@ -2,16 +2,16 @@ name: deploy_staging
 
 on:
   push:
-    branches: 
-      -develop
-      -main
+    branches:
+      - main
+      - master
   pull_request:
-    branches: 
-      -develop
-      -main
+    branches:
+      - main
+      - master
 
 jobs:
-  deploy_production:
+  deploy_staging:
     runs-on: ${{ matrix.os }}
 
     strategy:
