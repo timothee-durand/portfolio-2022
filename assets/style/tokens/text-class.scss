@@ -1,0 +1,17 @@
+@import "text-mixins";
+
+.title--big {
+  @include text-style-big-title;
+}
+
+.title--medium {
+  @include text-style-medium-title;
+}
+
+.title--small {
+  @include text-style-small-title;
+}
+
+.text--bold {
+  @include text-style-bold
+}

@@ -1,0 +1,19 @@
+:root {
+  --color-ash-grey: rgba(174,183,179,1);
+  --color-orange-yellow: rgba(239,203,104,1);
+  --color-rich-black: rgba(0,4,17,1);
+  --color-dark-purple: rgba(22,12,40,1);
+  --color-honeydew: rgba(225,239,230,1);
+}
+
+@mixin color-theme-dark {
+  --color-body-bg : var(--color-rich-black);
+  --color-text : var(--color-honeydew);
+}
+
+@mixin color-theme-light {
+  --color-body-bg : var(--color-honeydew);
+  --color-text : var(--color-rich-black);
+}
+
+

@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article ref="root">
     <h1>Projets</h1>
     <p>test</p>
     <ul>
@@ -20,5 +20,6 @@ export default {
       projects,
     }
   },
+
 }
 </script>

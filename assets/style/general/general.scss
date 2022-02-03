@@ -1,0 +1,31 @@
+@import "../tokens/text-mixins";
+@import "../tokens/colors";
+
+body.dark {
+  @include color-theme-dark
+}
+
+body.light {
+  @include color-theme-light
+}
+
+
+body {
+  font-family: Poppins, sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--color-body-bg);
+  color: var(--color-text);
+  @include text-style-text;
+}
+
+#app {
+  display: grid;
+  grid-template-rows: 10rem 1fr 5rem;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+a {
+  color : inherit;
+}
