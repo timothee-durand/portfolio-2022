@@ -1,6 +1,8 @@
 <template>
   <main>
-    <h1 class="title--big align-center">Timothée Durand <br> French Web Developper</h1>
+    <div class="hero d-flex justify-center">
+      <h1 class="title--big align-center">Timothée Durand <br> French Web Developper</h1>
+    </div>
 
   </main>
 </template>
@@ -14,5 +16,10 @@ export default {
   //   }
   // },
 
-}
+};
 </script>
+<style lang="scss">
+.hero {
+  min-height: calc(100vh - 17rem);
+}
+</style>
