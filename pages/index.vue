@@ -3,7 +3,6 @@
     <div class="hero d-flex justify-center">
       <h1 class="title--big align-center">Timothée Durand <br> French Web Developper</h1>
     </div>
-    <blob/>
   </main>
 </template>
 
