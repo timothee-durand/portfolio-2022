@@ -15,7 +15,6 @@
     "component": "plop component"
   },
   "dependencies": {
-    "@georgedoescode/spline": "^1.0.1",
     "@nuxt/content": "^1.15.1",
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/svg": "^0.4.0",

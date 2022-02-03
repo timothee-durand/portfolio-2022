@@ -2,11 +2,11 @@
   <svg ref="blob" :style="{ width: `${width}rem`, height: `${height}rem` }" />
 </template>
 <script lang="js">
-import { SVG } from "@svgdotjs/svg.js"
-import { random } from "@/utils/generative-utils.js"
-import { spline } from "@georgedoescode/spline"
+import {SVG} from "@svgdotjs/svg.js";
+import { random } from "@/utils/generative-utils.js";
+import { spline } from "@/utils/generative-utils.js";
 
-export default {
+export default  {
   name: "Blob",
   props: {
     width: {
@@ -16,7 +16,9 @@ export default {
     height: {
       type: Number,
       default: 20
-    }
+    },
+
+
   },
   data() {
     return {
@@ -37,7 +39,7 @@ export default {
 
     this.drawBlob();
   },
-  methods: {
+  methods : {
     drawBlob() {
       this.size = random(this.width / 2 * 0.5, this.width / 2 * 0.8)
       // choose a random number of points
@@ -69,7 +71,7 @@ export default {
         .fill("var(--color-orange-yellow)");
     }
   }
-
 }
 </script>
+
 <style lang="scss" scoped></style>
