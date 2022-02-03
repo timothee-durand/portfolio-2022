@@ -15,7 +15,7 @@ export default {
       userPref = "dark";
     }
 
-    if(document) document.body.classList.add(userPref);
+    document.body.classList.add(userPref);
   }
 };
 </script>
