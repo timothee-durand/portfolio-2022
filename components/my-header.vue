@@ -21,5 +21,6 @@ export default {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 2rem;
+    align-items: center;
   }
 </style>
