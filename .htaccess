@@ -1,0 +1,5 @@
+AuthName "Website in development // Area protected"
+AuthType Basic
+AuthUserFile .htpasswds
+
+Require valid-user
