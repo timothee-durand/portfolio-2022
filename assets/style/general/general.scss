@@ -1,14 +1,13 @@
-@import "../tokens/text-mixins";
-@import "../tokens/colors";
+@import '../tokens/text-mixins';
+@import '../tokens/colors';
 
 body.dark {
-  @include color-theme-dark
+  @include color-theme-dark;
 }
 
 body.light {
-  @include color-theme-light
+  @include color-theme-light;
 }
-
 
 body {
   font-family: Poppins, sans-serif;
@@ -27,5 +26,5 @@ body {
 }
 
 a {
-  color : inherit;
+  color: inherit;
 }

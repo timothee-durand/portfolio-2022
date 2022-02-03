@@ -1,10 +1,10 @@
 <template>
-  <svg ref="blob" :style="{width : `${width}rem`, height: `${height}rem` }" />
+  <svg ref="blob" :style="{ width: `${width}rem`, height: `${height}rem` }" />
 </template>
-<script>
-import { SVG } from "@svgdotjs/svg.js";
-import { random } from "@/utils/generative-utils.js";
-import { spline } from "@georgedoescode/spline";
+<script lang="js">
+import { SVG } from "@svgdotjs/svg.js"
+import { random } from "@/utils/generative-utils.js"
+import { spline } from "@georgedoescode/spline"
 
 export default {
   name: "Blob",
@@ -70,8 +70,6 @@ export default {
     }
   }
 
-};
+}
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

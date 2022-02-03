@@ -5,22 +5,20 @@
   </div>
 </template>
 <script>
-import DarkThemeLogo from "~/assets/images/logo-dark.svg?inline";
-import LightThemeLogo from "~/assets/images/logo-light.svg?inline";
+import DarkThemeLogo from '~/assets/images/logo-dark.svg?inline'
+import LightThemeLogo from '~/assets/images/logo-light.svg?inline'
 
 export default {
-  name: "Logo",
+  name: 'Logo',
   components: {
     DarkThemeLogo,
-    LightThemeLogo
-  }
-};
+    LightThemeLogo,
+  },
+}
 </script>
 <style lang="scss">
-
-body.light .logo__dark, body.dark .logo__light {
+body.light .logo__dark,
+body.dark .logo__light {
   display: none;
 }
-
-
 </style>
