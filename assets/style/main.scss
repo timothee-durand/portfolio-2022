@@ -1,14 +1,14 @@
 // TOKENS
-@import "tokens/colors";
-@import "tokens/text-class";
-@import "tokens/text-mixins";
+@import 'tokens/colors';
+@import 'tokens/text-class';
+@import 'tokens/text-mixins';
 @import 'tokens/fonts';
 
 //RESET
 @import 'general/reset';
 
 //UTILS
-@import "general/utils";
+@import 'general/utils';
 
 //GENERAL STYLE
-@import "general/general";
+@import 'general/general';

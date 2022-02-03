@@ -1,9 +1,11 @@
 <template>
   <main>
     <div class="hero d-flex justify-center">
-      <h1 class="title--big align-center">Timothée Durand <br> French Web Developper</h1>
+      <h1 class="title--big align-center">
+        Timothée Durand <br />
+        French Web Developper
+      </h1>
     </div>
-
   </main>
 </template>
 
@@ -15,8 +17,7 @@ export default {
   //     projects,
   //   }
   // },
-
-};
+}
 </script>
 <style lang="scss">
 .hero {

@@ -20,7 +20,9 @@ $ yarn generate
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
 ## Generators
+
 This project come with plop and several generators :
+
 - Run `plop component` or `yarn component` to create a new component
 - Run `plop project` or `yarn project` to create a new project
 

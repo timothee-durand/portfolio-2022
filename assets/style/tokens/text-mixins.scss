@@ -1,6 +1,6 @@
 @mixin text-style-big-title {
   font-size: 14.4rem;
-  font-family: "Commune Nuit Debout", sans-serif;
+  font-family: 'Commune Nuit Debout', sans-serif;
   text-decoration: none;
   font-weight: normal;
   font-style: normal;
@@ -8,7 +8,7 @@
 
 @mixin text-style-medium-title {
   font-size: 3.1rem;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: bolder;
   font-style: normal;
   text-decoration: none;
@@ -16,7 +16,7 @@
 
 @mixin text-style-small-title {
   font-size: 2rem;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: bolder;
   font-style: normal;
   text-decoration: none;
@@ -24,7 +24,7 @@
 
 @mixin text-style-text {
   font-size: 1.6rem;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: normal;
   font-style: normal;
   text-decoration: none;
@@ -32,9 +32,8 @@
 
 @mixin text-style-bold {
   font-size: 1.6rem;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 700;
   font-style: normal;
   text-decoration: none;
 }
-
