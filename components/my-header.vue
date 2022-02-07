@@ -4,7 +4,7 @@
       <Logo></Logo>
     </nuxt-link>
     <div class="header__links">
-      <nuxt-link to="#">Work</nuxt-link>
+      <nuxt-link to="/work">Work</nuxt-link>
       <nuxt-link to="#">About</nuxt-link>
       <SwitchTheme />
     </div>
