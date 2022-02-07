@@ -1,5 +1,5 @@
 <template>
-  <header class="header d-flex justify-between">
+  <header class="header u--d-flex u--justify-between">
     <nuxt-link to="/">
       <Logo></Logo>
     </nuxt-link>

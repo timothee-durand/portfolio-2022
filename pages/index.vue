@@ -1,10 +1,10 @@
 <template>
   <main>
-    <div class="hero d-flex justify-center">
-      <h1 class="title--big align-center">
-        Timothée Durand <br />
+    <div class="hero u--d-flex u--justify-center">
+      <my-text tag="h1" type="big" class="u--align-center">
+        Timothée Durand <br/>
         French Web Developper
-      </h1>
+      </my-text>
     </div>
   </main>
 </template>

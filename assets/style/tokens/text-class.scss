@@ -1,14 +1,14 @@
 @import 'text-mixins';
 
-.title--big {
+.text--big {
   @include text-style-big-title;
 }
 
-.title--medium {
+.text--medium {
   @include text-style-medium-title;
 }
 
-.title--small {
+.text--small {
   @include text-style-small-title;
 }
 
