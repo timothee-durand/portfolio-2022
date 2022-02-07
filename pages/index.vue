@@ -11,12 +11,7 @@
 
 <script>
 export default {
-  // async asyncData({ $content }) {
-  //   const projects = await $content('projects').fetch()
-  //   return {
-  //     projects,
-  //   }
-  // },
+
 }
 </script>
 <style lang="scss">
