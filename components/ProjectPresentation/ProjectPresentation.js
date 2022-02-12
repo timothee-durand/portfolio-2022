@@ -1,10 +1,23 @@
-import { Clock, Mesh, MeshNormalMaterial, PerspectiveCamera, Scene, WebGLRenderer } from "three";
+import {
+  Clock,
+  Mesh,
+  MeshNormalMaterial,
+  PerspectiveCamera,
+  Raycaster,
+  Scene,
+  Vector2,
+  Vector3,
+  WebGLRenderer
+} from "three";
 import { random } from "~/utils/generative-utils.js";
+import { gsap } from "gsap";
 
 export class ProjectPresentation {
   container;
   isInScreen = false;
   technos = [];
+  pointer = new Vector2(0, 0);
+  raycaster = new Raycaster();
   font;
   textGeometryParameters = {
     size: 3,
@@ -16,7 +29,8 @@ export class ProjectPresentation {
     bevelOffset: 0,
     bevelSegments: 5
   };
-  lastElapsedTime = 0
+  lastElapsedTime = 0;
+  isPointerOn = false
 
   constructor({ container, font }) {
     this.container = container;
@@ -33,6 +47,9 @@ export class ProjectPresentation {
     this.initThree();
     this.update();
     window.addEventListener("resize", () => this.onResize());
+    this.container.addEventListener("pointermove", (e) => this.onPointerMove(e));
+    this.container.addEventListener("pointerenter", () => this.isPointerOn = true );
+    this.container.addEventListener("pointerleave", () => this.isPointerOn = false );
   }
 
   initThree() {
@@ -72,13 +89,16 @@ export class ProjectPresentation {
     //  this.technos.forEach(tech => {
     this.text = this.createTextGeometry(TextGeometry, this.technos[0]);
     this.scene.add(this.text);
-    this.text.position.set(-3, 2, 0)
+    this.text.position.set(-3, 2, 0);
     //  })
 
-    this.capturePosition(this.text)
-    this.text.startingTime = random(10, 2000)
-    this.text.speed = random(0.5, 4, true)
+    this.captureProperty(this.text);
+    this.captureProperty(this.text, "rotation");
+    this.text.startingTime = random(10, 2000);
+    this.text.speed = random(0.5, 4, true);
     console.log(this.text);
+
+    this.launchAnimation(this.text);
   }
 
   createTextGeometry(TextGeometry, text) {
@@ -86,17 +106,24 @@ export class ProjectPresentation {
       text,
       this.textGeometryParameters
     );
+    //center pivot point
+    textGeometry.center();
     const textMaterial = new MeshNormalMaterial();
-    return new Mesh(textGeometry, textMaterial);
+    const mesh = new Mesh(textGeometry, textMaterial);
+    mesh.name = "text";
+    return mesh;
   }
 
   update() {
     if (this.isInScreen) {
-      const elapsedTime = this.clock.getElapsedTime()
-      this.lastElapsedTime = elapsedTime
-      if(this.text) {
-        this.text.position.y = this.text.startPosition.y - (Math.cos((elapsedTime + this.text.startingTime) * this.text.speed) * 0.01);
-      }
+      // const elapsedTime = this.clock.getElapsedTime()
+      // this.lastElapsedTime = elapsedTime
+      // if(this.text) {
+      //   this.text.position.y = this.text.startPosition.y - (Math.cos((elapsedTime + this.text.startingTime) * this.text.speed) * 0.01);
+      //   this.text.position.x = this.text.startPosition.x + (Math.cos((elapsedTime + this.text.startingTime) * this.text.speed) * 0.01);
+      //   this.text.rotation.y = this.text.startRotation.x - (Math.cos((elapsedTime + this.text.startingTime) * this.text.speed) * 0.1);
+      // }
+      if(this.isPointerOn) this.updateRaycaster()
       this.renderer.render(this.scene, this.camera);
     }
     window.requestAnimationFrame(() => this.update());
@@ -114,7 +141,96 @@ export class ProjectPresentation {
   }
 
 
-  capturePosition(object) {
-    object.startPosition = object.position
+  /**
+   * Keep the property by copying it and adding a prefix
+   * @param {object} object
+   * @param {string} property
+   * @param {string} prefix
+   */
+  captureProperty(object, property = "position", prefix = "start") {
+    if (!object[property]) {
+      console.error(`Property ${property} does not exist on this object : `, object);
+      return;
+    }
+    object[`${prefix}${property.charAt(0).toUpperCase()}${property.slice(1, property.length)}`] = object[property];
+  }
+
+  launchAnimation(text) {
+    const animationProxy = {
+      positionX: text.position.x,
+      positionY: text.position.y,
+      rotationY: text.rotation.y
+    };
+
+    gsap.timeline({ repeat: -1, yoyo: true, repeatDelay: random(0.1, 0.3, true), delay: random(0, 2, true) })
+      .to(animationProxy, {
+        positionX: animationProxy.positionX + random(0, 1, true),
+        positionY: animationProxy.positionY + random(0, 1, true),
+        rotationY: animationProxy.rotationY + Math.PI / random(20, 40),
+        duration: random(2, 4, true),
+        ease: `slow(${random(0.5, 1, true)}, ${random(0.5, 1, true)}, true)`,
+        onUpdate: () => {
+          text.position.x = animationProxy.positionX;
+          text.position.y = animationProxy.positionY;
+          // text.rotation.y = animationProxy.rotationY
+        }
+      })
+    // .to(animationProxy, {
+    //   positionX: animationProxy.positionX - 0.3,
+    //   positionY : animationProxy.positionY - 0.5,
+    //   rotationY : animationProxy.rotationY - Math.PI / 30,
+    //   duration : 2,
+    //   ease : "slow(0.7, 0.7, false)",
+    //   onUpdate : () => {
+    //     text.position.x = animationProxy.positionX
+    //     text.position.y = animationProxy.positionY
+    //     text.rotation.y = animationProxy.rotationY
+    //   }
+    // })
+    ;
+  }
+
+  onPointerMove(e) {
+    // calculate pointer position in normalized device coordinates
+    // (-1 to +1) for both components
+    const { left, top } = this.container.getBoundingClientRect();
+    const x = e.clientX - left;
+    const y = e.clientY - top;
+    this.pointer.x = (x / this.container.offsetWidth) * 2 - 1;
+    this.pointer.y = -(y / this.container.offsetHeight) * 2 + 1;
+    this.isPointerOn = true
+    //this.updateRaycaster();
+  }
+
+  updateRaycaster() {
+    // update the picking ray with the camera and pointer position
+    this.raycaster.setFromCamera(this.pointer, this.camera);
+    // calculate objects intersecting the picking ray
+    this.raycaster.intersectObjects( this.scene.children );
+    if(!this.text) return
+    const direction = this.raycaster.ray.direction
+    const position = new Vector3()
+    this.text.getWorldPosition(position)
+    const distance = new Vector2(
+      direction.x - position.x,
+      direction.y - position.y
+    )
+
+    //if(distance.x <= 2) {
+
+    console.log("-----------");
+    console.log(distance.x);
+    console.log(distance.y);
+    //}
+    // console.log(`x : ${distance.x.toFixed(2)}`);
+    // console.log(`y : ${distance.y.toFixed(2)}`);
+
+    // for ( let i = 0; i < intersects.length; i ++ ) {
+    //   if(intersects[i].object.name === "text")
+    //   console.log(intersects[i].object);
+    //   //intersects[ i ].object.material.color.set( 0xff0000 );
+    //
+    // }
+
   }
 }
