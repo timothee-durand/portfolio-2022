@@ -1,3 +1,10 @@
+/**
+ *
+ *  From Georges Francis, our master
+ *  https://github.com/georgedoescode/generative-utils/tree/master/src
+ *
+ */
+
 // choose a number within a range, integer (whole number) by default
 const random = (min, max, float = false) => {
   const val = Math.random() * (max - min) + min
@@ -76,4 +83,28 @@ function spline(points = [], tension = 1, close = false, cb) {
 
   return path
 }
-export { spline, random }
+
+function createCoordsTransformer(svg) {
+  const pt = svg.createSVGPoint();
+
+  return function (e) {
+    pt.x = e.clientX;
+    pt.y = e.clientY;
+
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  };
+}
+
+function pointsInPath(path, numPoints = 10) {
+  const pathLength = path.getTotalLength();
+  const step = pathLength / numPoints;
+  const points = [];
+
+  for (let i = 0; i < pathLength; i += step) {
+    points.push(path.getPointAtLength(i));
+  }
+
+  return points;
+}
+
+export { spline, random, pointsInPath, createCoordsTransformer }

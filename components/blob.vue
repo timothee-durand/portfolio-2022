@@ -1,12 +1,16 @@
 <template>
-  <svg ref="blob" :style="{ width: `${width}rem`, height: `${height}rem` }" />
+  <div class="blob">
+    <svg class="blob--svg" ref="blob" :style="{ width: `${width}rem`, height: `${height}rem` }"/>
+    <p class="blob--text">{{text}}</p>
+  </div>
+
 </template>
 <script lang="js">
-import {SVG} from "@svgdotjs/svg.js";
-import { random } from "@/utils/generative-utils.js";
-import { spline } from "@/utils/generative-utils.js";
+import { SVG } from "@svgdotjs/svg.js";
+import { createCoordsTransformer, pointsInPath, random, spline } from "@/utils/generative-utils.js";
+import {gsap} from "gsap";
 
-export default  {
+export default {
   name: "Blob",
   props: {
     width: {
@@ -17,7 +21,10 @@ export default  {
       type: Number,
       default: 20
     },
-
+    text: {
+      type: String,
+      default: "text"
+    }
 
   },
   data() {
@@ -30,18 +37,17 @@ export default  {
   },
   mounted() {
     //init svg
-    this.svg = SVG(this.$el).viewbox(0, 0, this.width, this.height);
-
-    this.$el.addEventListener("mouseenter", (e) => {
-      this.$el.innerHTML = "";
-      this.drawBlob();
-    });
+    this.svg = SVG(this.$refs.blob).viewbox(0, 0, this.width, this.height);
+    // this.$el.addEventListener("mouseenter", (e) => {
+    //   this.$el.innerHTML = "";
+    //   this.drawBlob();
+    // });
 
     this.drawBlob();
   },
-  methods : {
+  methods: {
     drawBlob() {
-      this.size = random(this.width / 2 * 0.5, this.width / 2 * 0.8)
+      this.size = random(this.width / 2 * 0.5, this.width / 2 * 0.8);
       // choose a random number of points
       const numPoints = random(5, 12);
       // step used to place each point at equal distances
@@ -66,12 +72,116 @@ export default  {
       const pathData = spline(points, 1, true);
 
       // render the body in the form of an svg <path /> element!
-      this.svg
+      const path = this.svg
         .path(pathData)
         .fill("var(--color-orange-yellow)");
+      console.log(path);
+      this.createLiquidPath(path.node,  {
+        detail: 40,
+        tension: 2,
+        close: true,
+        range: {
+          x: 20,
+          y: 20
+        },
+        axis: ["y"]
+      })
+    },
+    //from georges francis https://georgefrancis.dev/writing/create-a-liquid-hover-effect-with-gsap-and-svg/
+    createLiquidPath(path, options) {
+      const svgPoints = pointsInPath(path, options.detail);
+      const originPoints = svgPoints.map(({ x, y }) => ({ x, y }));
+      const liquidPoints = svgPoints.map(({ x, y }) => ({ x, y }));
+
+      const mousePos = { x: 0, y: 0 };
+      const transformCoords = createCoordsTransformer(path.closest("svg"));
+
+      const pointDistance = Math.hypot(
+        originPoints[0].x - originPoints[1].x,
+        originPoints[0].y - originPoints[1].y
+      );
+      const maxDist = {
+        x: options.axis.includes("x") ? pointDistance / 2 : 0,
+        y: options.axis.includes("y") ? pointDistance / 2 : 0
+      };
+
+      gsap.ticker.add(() => {
+        gsap.set(path, {
+          attr: {
+            d: spline(liquidPoints, options.tension, options.close)
+          }
+        });
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        const { x, y } = transformCoords(e);
+
+        mousePos.x = x;
+        mousePos.y = y;
+
+        liquidPoints.forEach((point, index) => {
+          const pointOrigin = originPoints[index];
+          const distX = Math.abs(pointOrigin.x - mousePos.x);
+          const distY = Math.abs(pointOrigin.y - mousePos.y);
+
+          if (distX <= options.range.x && distY <= options.range.y) {
+            const difference = {
+              x: pointOrigin.x - mousePos.x,
+              y: pointOrigin.y - mousePos.y
+            };
+
+            const target = {
+              x: pointOrigin.x + difference.x,
+              y: pointOrigin.y + difference.y
+            };
+
+            const x = gsap.utils.clamp(
+              pointOrigin.x - maxDist.x,
+              pointOrigin.x + maxDist.x,
+              target.x
+            );
+
+            const y = gsap.utils.clamp(
+              pointOrigin.y - maxDist.y,
+              pointOrigin.y + maxDist.y,
+              target.y
+            );
+
+            gsap.to(point, {
+              x: x,
+              y: y,
+              ease: "sine",
+              overwrite: true,
+              duration: 0.175,
+              onComplete() {
+                gsap.to(point, {
+                  x: pointOrigin.x,
+                  y: pointOrigin.y,
+                  ease: "elastic.out(1, 0.3)",
+                  duration: 1.25
+                });
+              }
+            });
+          }
+        });
+      });
     }
   }
-}
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.blob {
+  position: relative;
+}
+
+.blob--text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color-rich-black);
+  width: 45%;
+  text-align: center;
+}
+</style>

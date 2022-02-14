@@ -1,6 +1,9 @@
 <template>
   <div class="project-presentation" :data-techno="getJsonData()">
-    <slot></slot>
+    <router-link :to="metadatas.path">
+      <blob :text="metadatas.title"></blob>
+    </router-link>
+
   </div>
 </template>
 <script>
@@ -12,11 +15,12 @@ export default {
       type: Object,
       default() {
         return {
-          technos:
+          techs:
             [
               "VueJs",
               "ThreeJS"
-            ]
+            ],
+          title : "Project"
         };
       }
     }
@@ -26,7 +30,7 @@ export default {
   },
   methods: {
     getJsonData() {
-      return JSON.stringify(this.metadatas.technos);
+      return JSON.stringify(this.metadatas.techs);
     }
   }
 
@@ -35,7 +39,7 @@ export default {
 <style lang="scss">
 .project-presentation {
   width: 50rem;
-  height: 30rem;
+  height: 40rem;
   display: flex;
   align-items: center;
   justify-content: center;

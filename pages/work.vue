@@ -1,23 +1,6 @@
 <template>
   <main ref="container">
-    <project-presentation >
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, unde!</p>
-    </project-presentation>
-    <project-presentation>
-      <p>Aperiam autem debitis maxime nihil non odit quasi veniam veritatis.</p>
-    </project-presentation>
-    <project-presentation>
-      <p>Debitis eaque error eum inventore laborum odit, quo ratione repudiandae?</p>
-    </project-presentation>
-    <project-presentation>
-      <p>Ab amet atque consequatur dolores ex, officia tenetur ut voluptates.</p>
-    </project-presentation>
-    <project-presentation>
-      <p>A adipisci cumque distinctio dolore ducimus eos laboriosam nesciunt quidem.</p>
-    </project-presentation>
-    <project-presentation>
-      <p>Aperiam autem debitis maxime nihil non odit quasi veniam veritatis.</p>
-    </project-presentation>
+    <project-presentation v-for="project in projects" :key="project.createdAt" :metadatas="project"></project-presentation>
 
   </main>
 
@@ -30,6 +13,12 @@ export default {
   data() {
     return {
     };
+  },
+  async asyncData({ $content }) {
+    const projects = await $content("projects").fetch()
+    return {
+      projects
+    }
   },
   mounted() {
     this.scene = new ProjectPresentationMaster({

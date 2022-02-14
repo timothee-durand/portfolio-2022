@@ -10,7 +10,8 @@ import {
   WebGLRenderer
 } from "three";
 import { random } from "~/utils/generative-utils.js";
-import { gsap } from "gsap";
+import { Bounce, Elastic, gsap } from "gsap";
+
 
 export class ProjectPresentation {
   container;
@@ -20,7 +21,7 @@ export class ProjectPresentation {
   raycaster = new Raycaster();
   font;
   textGeometryParameters = {
-    size: 3,
+    size: 2,
     height: 0.2,
     curveSegments: 12,
     bevelEnabled: true,
@@ -30,7 +31,16 @@ export class ProjectPresentation {
     bevelSegments: 5
   };
   lastElapsedTime = 0;
-  isPointerOn = false
+  isPointerOn = false;
+
+  possibleStartPositions = [
+    new Vector3(-4, 4, 0),
+    new Vector3(0, 3, -1),
+    new Vector3(-4, -5, -1),
+    new Vector3(2, -4, -3)
+  ];
+  possiblePositionIndex = 0;
+
 
   constructor({ container, font }) {
     this.container = container;
@@ -48,8 +58,10 @@ export class ProjectPresentation {
     this.update();
     window.addEventListener("resize", () => this.onResize());
     this.container.addEventListener("pointermove", (e) => this.onPointerMove(e));
-    this.container.addEventListener("pointerenter", () => this.isPointerOn = true );
-    this.container.addEventListener("pointerleave", () => this.isPointerOn = false );
+    this.container.addEventListener("pointerenter", () => this.isPointerOn = true);
+    this.container.addEventListener("pointerleave", () => this.isPointerOn = false);
+
+    this.shuffleArray(this.possibleStartPositions);
   }
 
   initThree() {
@@ -59,6 +71,8 @@ export class ProjectPresentation {
     this.addCamera();
     this.addRenderer();
     this.addBaseObject();
+    //render once
+    this.renderer.render(this.scene, this.camera);
   }
 
   addCamera() {
@@ -77,28 +91,39 @@ export class ProjectPresentation {
   }
 
   async addBaseObject() {
-    // const cubeGeom = new BoxGeometry(1, 1);
-    // const cubeMat = new MeshNormalMaterial();
-    // const cube = new Mesh(cubeGeom, cubeMat);
-    // this.scene.add(cube);
-    // cube.position.set(0, 0, 0);
-    // this.cube = cube;
-
     const { TextGeometry } = await import("three/examples/jsm/geometries/TextGeometry.js");
 
-    //  this.technos.forEach(tech => {
-    this.text = this.createTextGeometry(TextGeometry, this.technos[0]);
-    this.scene.add(this.text);
-    this.text.position.set(-3, 2, 0);
-    //  })
+    this.technos.forEach(tech => {
+      const position = this.getRandomPosition();
+      if (!position) {
+        return;
+      }
+      const text = this.createTextGeometry(TextGeometry, tech);
+      this.scene.add(text);
+      text.position.copy(position);
+      text.randomScale = random(0.7, 1, true)
+      text.startingTime = random(10, 2000);
+      text.speed = random(0.5, 4, true);
+      text.scale.set(0, 0, 0);
 
-    this.captureProperty(this.text);
-    this.captureProperty(this.text, "rotation");
-    this.text.startingTime = random(10, 2000);
-    this.text.speed = random(0.5, 4, true);
-    console.log(this.text);
+      this.launchAnimation(text);
+    });
+    console.log("---------");
 
-    this.launchAnimation(this.text);
+  }
+
+  getRandomPosition() {
+    if (this.possiblePositionIndex >= this.possibleStartPositions.length - 1) return null;
+    const randomPos = this.possibleStartPositions[this.possiblePositionIndex];
+    this.possiblePositionIndex++;
+    return randomPos;
+  }
+
+  shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
   }
 
   createTextGeometry(TextGeometry, text) {
@@ -123,7 +148,7 @@ export class ProjectPresentation {
       //   this.text.position.x = this.text.startPosition.x + (Math.cos((elapsedTime + this.text.startingTime) * this.text.speed) * 0.01);
       //   this.text.rotation.y = this.text.startRotation.x - (Math.cos((elapsedTime + this.text.startingTime) * this.text.speed) * 0.1);
       // }
-      if(this.isPointerOn) this.updateRaycaster()
+      if (this.isPointerOn) this.updateRaycaster();
       this.renderer.render(this.scene, this.camera);
     }
     window.requestAnimationFrame(() => this.update());
@@ -159,35 +184,33 @@ export class ProjectPresentation {
     const animationProxy = {
       positionX: text.position.x,
       positionY: text.position.y,
-      rotationY: text.rotation.y
+      rotationY: text.rotation.y,
+      positionZ : text.position.z
     };
+    console.log(text);
+    gsap.to(text.scale, {
+      x : text.randomScale,
+      y : text.randomScale,
+      z : text.randomScale,
+      duration : 0.5,
+      ease : Bounce.easeOut
+    });
 
-    gsap.timeline({ repeat: -1, yoyo: true, repeatDelay: random(0.1, 0.3, true), delay: random(0, 2, true) })
+    gsap.timeline({ repeat: -1, yoyo: true, repeatDelay: random(0.1, 0.3, true) })
       .to(animationProxy, {
         positionX: animationProxy.positionX + random(0, 1, true),
         positionY: animationProxy.positionY + random(0, 1, true),
+        // positionZ: animationProxy.positionZ + random(-0.000001, 0.000001, true),
         rotationY: animationProxy.rotationY + Math.PI / random(20, 40),
         duration: random(2, 4, true),
         ease: `slow(${random(0.5, 1, true)}, ${random(0.5, 1, true)}, true)`,
         onUpdate: () => {
           text.position.x = animationProxy.positionX;
           text.position.y = animationProxy.positionY;
+          // text.position.z = animationProxy.positionZ;
           // text.rotation.y = animationProxy.rotationY
         }
-      })
-    // .to(animationProxy, {
-    //   positionX: animationProxy.positionX - 0.3,
-    //   positionY : animationProxy.positionY - 0.5,
-    //   rotationY : animationProxy.rotationY - Math.PI / 30,
-    //   duration : 2,
-    //   ease : "slow(0.7, 0.7, false)",
-    //   onUpdate : () => {
-    //     text.position.x = animationProxy.positionX
-    //     text.position.y = animationProxy.positionY
-    //     text.rotation.y = animationProxy.rotationY
-    //   }
-    // })
-    ;
+      });
   }
 
   onPointerMove(e) {
@@ -198,7 +221,7 @@ export class ProjectPresentation {
     const y = e.clientY - top;
     this.pointer.x = (x / this.container.offsetWidth) * 2 - 1;
     this.pointer.y = -(y / this.container.offsetHeight) * 2 + 1;
-    this.isPointerOn = true
+    this.isPointerOn = true;
     //this.updateRaycaster();
   }
 
@@ -206,31 +229,28 @@ export class ProjectPresentation {
     // update the picking ray with the camera and pointer position
     this.raycaster.setFromCamera(this.pointer, this.camera);
     // calculate objects intersecting the picking ray
-    this.raycaster.intersectObjects( this.scene.children );
-    if(!this.text) return
-    const direction = this.raycaster.ray.direction
-    const position = new Vector3()
-    this.text.getWorldPosition(position)
-    const distance = new Vector2(
-      direction.x - position.x,
-      direction.y - position.y
-    )
+    const intersects = this.raycaster.intersectObjects(this.scene.children);
 
-    //if(distance.x <= 2) {
+    //check the object that intersects
+    for (let i = 0; i < intersects.length; i++) {
+      const object = intersects[i].object;
+      if (object.name === "text" && !object.isAnimating) {
+        //if text not animated then animate it
+        gsap.to(object.rotation, {
+          onStart: () => {
+            object.isAnimating = true;
+          },
+          x: Math.PI * 2,
+          duration: 2,
+          ease: Elastic.easeOut,
+          onComplete: () => {
+            object.isAnimating = false;
+            object.rotation.x = 0;
+          }
+        });
+      }
 
-    console.log("-----------");
-    console.log(distance.x);
-    console.log(distance.y);
-    //}
-    // console.log(`x : ${distance.x.toFixed(2)}`);
-    // console.log(`y : ${distance.y.toFixed(2)}`);
-
-    // for ( let i = 0; i < intersects.length; i ++ ) {
-    //   if(intersects[i].object.name === "text")
-    //   console.log(intersects[i].object);
-    //   //intersects[ i ].object.material.color.set( 0xff0000 );
-    //
-    // }
+    }
 
   }
 }
