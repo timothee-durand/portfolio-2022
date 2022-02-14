@@ -3,6 +3,7 @@
     <my-header />
     <Nuxt />
     <my-footer />
+    <svg-background />
   </div>
 </template>
 <script>
@@ -10,14 +11,14 @@ export default {
   mounted() {
     const userPrefersDark =
       window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-    let userPref = 'light'
+    let userPref = "light";
     if (userPrefersDark) {
-      userPref = 'dark'
+      userPref = "dark";
     }
 
-    document.body.classList.add(userPref)
-  },
-}
+    document.body.classList.add(userPref);
+  }
+};
 </script>
