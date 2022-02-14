@@ -1,10 +1,10 @@
 <template>
-  <header class="header d-flex justify-between">
+  <header class="header u--d-flex u--justify-between">
     <nuxt-link to="/">
       <Logo></Logo>
     </nuxt-link>
     <div class="header__links">
-      <nuxt-link to="#">Work</nuxt-link>
+      <nuxt-link to="/work">Work</nuxt-link>
       <nuxt-link to="#">About</nuxt-link>
       <SwitchTheme />
     </div>

@@ -11,6 +11,7 @@ link: https://timotheedurand.fr
 techs:
   - VueJS
   - ThreeJS
+  - GSAP
 ---
 
 # test
