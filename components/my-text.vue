@@ -5,31 +5,29 @@
 </template>
 <script>
 export default {
-  name: "CompText",
+  name: 'CompText',
   props: {
     tag: {
       type: String,
-      default: "p"
+      default: 'p',
     },
     text: {
       type: String,
-      default: ""
+      default: '',
     },
     type: {
       type: String,
-      default: "default"
+      default: 'default',
     },
     color: {
       type: String,
-      default:
-        "greys-black"
-    }
+      default: 'greys-black',
+    },
   },
   computed: {
     className() {
-      return `text text--${this.type} text--${this.color}`;
-    }
-  }
-  ,
+      return `text text--${this.type} text--${this.color}`
+    },
+  },
 }
 </script>

@@ -26,10 +26,20 @@ body {
   position: relative;
 }
 
+#content {
+  width: 100%;
+  max-width: 60rem;
+  margin: auto;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
 a {
   color: inherit;
 }
-
 
 //canvas {
 //  position: absolute;

@@ -2,7 +2,7 @@
   <main>
     <div class="hero u--d-flex u--justify-center">
       <my-text tag="h1" type="big" class="u--align-center">
-        Timothée Durand <br/>
+        Timothée Durand <br />
         French Web Developper
       </my-text>
     </div>
@@ -10,9 +10,7 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 <style lang="scss">
 .hero {

@@ -1,18 +1,16 @@
-import { ProjectPresentation } from "~/components/ProjectPresentation/ProjectPresentation.js";
-
+import { ProjectPresentationThree } from '~/components/ProjectPresentation/ProjectPresentationThree.js'
 
 export default class ProjectPresentationMaster {
-  height;
-  width;
-  elements = [];
-
+  height
+  width
+  elements = []
 
   constructor({ container, elements }) {
-    this.container = container;
-    this.elements = [...elements];
-    this.width = this.container.offsetWidth;
-    this.height = this.container.offsetHeight;
-    this.initObserver();
+    this.container = container
+    this.elements = [...elements]
+    this.width = this.container.offsetWidth
+    this.height = this.container.offsetHeight
+    this.initObserver()
     this.initScenes()
   }
 
@@ -20,37 +18,43 @@ export default class ProjectPresentationMaster {
     const font = await this.loadFacetype()
 
     this.elements.forEach((e) => {
-      e.projectPresentation = new ProjectPresentation({ container: e, font });
+      e.projectPresentation = new ProjectPresentationThree({
+        container: e,
+        font,
+      })
       // this.projectPresentations.push(new ProjectPresentation({ container: e }));
-      this.observer.observe(e);
-    });
+      this.observer.observe(e)
+    })
   }
-
-
 
   initObserver() {
     const options = {
       root: null,
-      rootMargin: "0px"
-    };
+      rootMargin: '0px',
+    }
 
-    this.observer = new IntersectionObserver((e) => this.onIntersection(e), options);
+    this.observer = new IntersectionObserver(
+      (e) => this.onIntersection(e),
+      options
+    )
   }
 
   onIntersection(entries) {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.intersectionRatio > 0) {
-        entry.target.projectPresentation.isInScreen = true;
-        return;
+        entry.target.projectPresentation.isInScreen = true
+        return
       }
 
-      entry.target.projectPresentation.isInScreen = false;
-    });
+      entry.target.projectPresentation.isInScreen = false
+    })
   }
 
   loadFacetype() {
     return new Promise(async (resolve) => {
-      const {FontLoader} = await import("three/examples/jsm/loaders/FontLoader.js")
+      const { FontLoader } = await import(
+        'three/examples/jsm/loaders/FontLoader.js'
+      )
       const fontLoader = new FontLoader()
       fontLoader.load(
         '/facetypes/commune_nuit_debout.typeface.json.json',
@@ -59,8 +63,5 @@ export default class ProjectPresentationMaster {
         }
       )
     })
-
   }
-
-
 }

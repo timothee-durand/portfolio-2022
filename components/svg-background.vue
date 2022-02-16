@@ -1,69 +1,183 @@
 <template>
-  <svg ref="svgBackground" class="svg-background"/>
+  <svg ref="svgBackground" class="svg-background" />
 </template>
 
 <script>
 import { SVG } from "@svgdotjs/svg.js";
 import { random } from "@/utils/generative-utils.js";
 
-
 export default {
   name: "svg-background",
+  props: {
+    contentSelector: {
+      type: String,
+      default: "#content"
+    },
+    headerSelector: {
+      type: String,
+      default: "header"
+    },
+    footerSelector: {
+      type: String,
+      default: "footer"
+    }
+  },
   data() {
     return {
-      forms: [
-        this.cross,
-        this.circle,
-        this.cross2,
-        this.flash,
-        this.angle
-      ]
+      forms: [this.cross, this.circle, this.cross2, this.flash, this.angle],
+      baseColorName: "--color-orange-yellow",
+      baseColor: { h: 0, s: 0, l: 0 },
+      colors: [],
+      colorNumber: 10,
+      strokeWidth: 3,
+      width: window.innerWidth,
+      height: document.documentElement.scrollHeight,
+      marginWidth: 20,
+      padding: 10,
+      minY: 0,
+      maxY: this.height
     };
   },
   mounted() {
     //init svg
-    this.svg = SVG(this.$refs.svgBackground)
-
-    this.setViewBox()
-    console.log(this.forms[0]);
-
-    this.addForms()
+    this.svg = SVG(this.$refs.svgBackground);
+    this.initForms();
     //add on resize handler
-    window.addEventListener("resize",()=> this.onResize() )
+    window.addEventListener("resize", () => this.onResize());
   },
+  watch: {
+    "$route"() {
+      this.clear()
+      this.initForms()
+    }
+  },
+  computed: {},
   methods: {
+    initForms() {
+      this.updateDimensions()
+      this.getBoundingValues();
+      this.setViewBox();
+      this.setColorFromCss();
+      this.generateColorPallet();
+      this.addForms();
+    },
+    clear() {
+      this.$refs.svgBackground.innerHTML = ""
+    },
+    getBoundingValues() {
+      this.contentElement = document.querySelector(this.contentSelector);
+      if (!this.contentElement) {
+        return;
+      }
+      const { width: contentWidth } = this.contentElement.getBoundingClientRect();
+      this.marginWidth = (this.width - contentWidth) / 2;
+
+      this.headerElement = document.querySelector(this.headerSelector);
+      const { bottom: headerBottom } = this.headerElement.getBoundingClientRect();
+      this.minY = headerBottom;
+
+      this.footerElement = document.querySelector(this.footerSelector);
+      const { height: footerHeight } = this.footerElement.getBoundingClientRect();
+      this.maxY = this.height - footerHeight;
+
+    },
+    updateDimensions() {
+      this.width = window.innerWidth;
+      this.height = document.documentElement.scrollHeight;
+    },
     onResize() {
-      this.setViewBox()
+      this.updateDimensions()
+      this.setViewBox();
     },
     setViewBox() {
-      this.svg.viewbox(0, 0, window.innerWidth, document.documentElement.scrollHeight)
+      this.svg.viewbox(0, 0, this.width, this.height);
     },
     addForms() {
-      for (let i = 0; i < random(10, 20); i++) {
-        this.getRandomForm().move(random(0, window.innerWidth), random(0, document.documentElement.scrollHeight))
+      const sides = [
+        {
+          min: this.padding,
+          max: this.marginWidth - this.padding
+        },
+        {
+          min: this.width - this.marginWidth + this.padding,
+          max: this.width - this.padding
+        }
+      ];
+      const number = random(10, 20);
+      for (let i = 0; i < number; i++) {
+        const side = random(sides);
+        const form = this.getRandomForm();
+        const { width, height } = form.node.getBoundingClientRect();
+
+        let x = random(side.min, side.max);
+        let overtakingX = (x + width) - side.max;
+        if (overtakingX > 0) x = x - overtakingX - random(this.padding, this.padding * 1.2);
+
+        let y = random(this.minY, this.maxY);
+        let overtakingY = (y + height) - this.maxY;
+        if (overtakingY > 0) y = y - overtakingY - random(this.padding, this.padding * 1.2);
+
+        form.move(x, y);
       }
     },
     getRandomForm() {
-      const size = random(20,60)
-      return random(this.forms)(size, size, "var(--color-orange-yellow)");
+      const size = random(20, 40);
+      return random(this.forms)(size, size, this.getRandomColor());
     },
-
-
+    tweakColor({ h, s, l }) {
+      return {
+        h: h + random(-2, 2),
+        s: s + random(-2, 2),
+        l: l + random(-2, 2)
+      };
+    },
+    getRandomColor() {
+      return this.getHslString(this.tweakColor(random(this.colors)));
+    },
+    generateColorPallet() {
+      for (let i = 0; i < this.colorNumber; i++) {
+        this.colors.push({
+          h: this.baseColor.h + i * (360 / this.colorNumber),
+          s: this.baseColor.s,
+          l: this.baseColor.l
+        });
+      }
+    },
+    getHslString({ h, s, l }) {
+      return `hsl(${h.toFixed()}, ${s.toFixed()}%, ${l.toFixed()}%)`;
+    },
+    setColorFromCss() {
+      const baseColorValue = getComputedStyle(
+        document.documentElement
+      ).getPropertyValue(this.baseColorName);
+      const result = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(
+        baseColorValue
+      );
+      this.baseColor = {
+        h: parseInt(result[1]),
+        s: parseInt(result[2]),
+        l: parseInt(result[3])
+      };
+    },
     cross(width, height, strokeColor) {
       //console.log("soeo", strokeColor);
       const group = this.svg.group();
       group
         .line(0, height / 2, width, height / 2)
-        .stroke({ width: 1, color: strokeColor });
+        .stroke({ width: this.strokeWidth, color: strokeColor, linecap: "round" });
       group
         .line(width / 2, 0, width / 2, height)
-        .stroke({ width: 1, color: strokeColor });
+        .stroke({ width: this.strokeWidth, color: strokeColor, linecap: "round" });
       return group;
     },
     cross2(width, height, strokeColor) {
       const group = this.svg.group();
-      group.line(0, 0, width, height).stroke({ width: 1, color: strokeColor });
-      group.line(width, 0, 0, height);
+      group
+        .line(0, 0, width, height)
+        .stroke({ width: this.strokeWidth, color: strokeColor, linecap: "round" });
+      group
+        .line(width, 0, 0, height)
+        .stroke({ width: this.strokeWidth, color: strokeColor, linecap: "round" });
       return group;
     },
     circle(width, height, strokeColor) {
@@ -71,7 +185,7 @@ export default {
       group
         .ellipse(width, height)
         .fill("transparent")
-        .stroke({ width: 1, color: strokeColor });
+        .stroke({ width: this.strokeWidth, color: strokeColor, linecap: "round" });
       return group;
     },
     flash(width, height, strokeColor) {
@@ -85,7 +199,7 @@ export default {
           [width * 0.55, height]
         ])
         .fill("transparent")
-        .stroke({ width: 1, color: strokeColor });
+        .stroke({ width: this.strokeWidth, color: strokeColor, linecap: "round" });
       return group;
     },
     angle(width, height, color) {
@@ -96,11 +210,10 @@ export default {
           [0, 0],
           [0, height]
         ])
-        .stroke({ width: 1, color })
+        .stroke({ width: this.strokeWidth, color, linecap: "round" })
         .fill("transparent");
       return group;
     }
-
   }
 };
 </script>
@@ -111,6 +224,5 @@ export default {
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
 }
 </style>
