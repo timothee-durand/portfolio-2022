@@ -1,6 +1,6 @@
 :root {
-  --font-title : 'Commune Nuit Debout', sans-serif;
-  --font-text : 'Poppins', sans-serif;
+  --font-title: 'Commune Nuit Debout', sans-serif;
+  --font-text: 'Poppins', sans-serif;
 }
 
 @mixin text-base {
@@ -12,34 +12,33 @@
   font-size: 14.4rem;
   font-family: var(--font-title);
   font-weight: normal;
-  @include text-base
+  @include text-base;
 }
 
 @mixin text-style-medium-title {
   font-size: 3.1rem;
   font-family: var(--font-text);
   font-weight: bolder;
-  @include text-base
-
+  @include text-base;
 }
 
 @mixin text-style-small-title {
   font-size: 2rem;
   font-family: var(--font-text);
   font-weight: bolder;
-  @include text-base
+  @include text-base;
 }
 
 @mixin text-style-text {
   font-size: 1.6rem;
   font-family: var(--font-text);
   font-weight: normal;
-  @include text-base
+  @include text-base;
 }
 
 @mixin text-style-bold {
   font-size: 1.6rem;
   font-family: var(--font-text);
   font-weight: 700;
-  @include text-base
+  @include text-base;
 }

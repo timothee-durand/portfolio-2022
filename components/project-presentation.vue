@@ -3,38 +3,29 @@
     <router-link :to="metadatas.path">
       <blob :text="metadatas.title"></blob>
     </router-link>
-
   </div>
 </template>
 <script>
-
 export default {
-  name: "ProjectPresentation",
+  name: 'ProjectPresentation',
   props: {
     metadatas: {
       type: Object,
       default() {
         return {
-          techs:
-            [
-              "VueJs",
-              "ThreeJS"
-            ],
-          title : "Project"
-        };
-      }
-    }
+          techs: ['VueJs', 'ThreeJS'],
+          title: 'Project',
+        }
+      },
+    },
   },
-  mounted() {
-
-  },
+  mounted() {},
   methods: {
     getJsonData() {
-      return JSON.stringify(this.metadatas.techs);
-    }
-  }
-
-};
+      return JSON.stringify(this.metadatas.techs)
+    },
+  },
+}
 </script>
 <style lang="scss">
 .project-presentation {

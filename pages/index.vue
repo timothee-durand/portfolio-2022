@@ -2,7 +2,7 @@
   <main>
     <div class="hero u--d-flex u--justify-center">
       <my-text tag="h1" type="big" class="u--align-center">
-        Timothée Durand <br/>
+        Timothée Durand <br />
         French Web Developper
       </my-text>
     </div>
@@ -10,8 +10,10 @@
 </template>
 
 <script>
-export default {
+import svgBackground from "@/mixins/svg-background.js";
 
+export default {
+  mixins : [svgBackground]
 }
 </script>
 <style lang="scss">

@@ -1,10 +1,13 @@
 <template>
-  <div id="app" ref="root">
-    <my-header />
-    <Nuxt />
-    <my-footer />
+  <div ref="root">
+    <div id="app">
+      <my-header />
+      <Nuxt id="content" />
+      <my-footer />
+    </div>
   </div>
 </template>
+<style></style>
 <script>
 export default {
   mounted() {
@@ -18,6 +21,6 @@ export default {
     }
 
     document.body.classList.add(userPref)
-  },
+  }
 }
 </script>

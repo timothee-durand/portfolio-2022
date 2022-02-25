@@ -1,15 +1,17 @@
 <template>
   <div class="blob">
-    <svg class="blob--svg" ref="blob" :style="{ width: `${width}rem`, height: `${height}rem` }"/>
-    <p class="blob--text">{{text}}</p>
+    <svg
+      class="blob--svg"
+      ref="blob"
+      :style="{ width: `${width}rem`, height: `${height}rem` }"
+    />
+    <p class="blob--text">{{ text }}</p>
   </div>
-
 </template>
 <script lang="js">
 import { SVG } from "@svgdotjs/svg.js";
-import { createCoordsTransformer, pointsInPath, random, spline } from "@/utils/generative-utils.js";
 import {gsap} from "gsap";
-
+import { createCoordsTransformer, pointsInPath, random, spline } from "@/utils/generative-utils.js"
 export default {
   name: "Blob",
   props: {

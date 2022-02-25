@@ -6,14 +6,22 @@
  */
 
 // choose a number within a range, integer (whole number) by default
-const random = (min, max, float = false) => {
-  const val = Math.random() * (max - min) + min
+function random() {
+  const isArray = Array.isArray(arguments[0])
 
-  if (float) {
-    return val
+  if (isArray) {
+    const targetArray = arguments[0]
+
+    return targetArray[random(0, targetArray.length - 1, true)]
+  } else {
+    const min = arguments[0]
+    const max = arguments[1]
+    const clamp = arguments[2] || false
+
+    const val = Math.random() * (max - min) + min
+
+    return clamp ? Math.round(val) : val
   }
-
-  return Math.floor(val)
 }
 
 function formatPoints(points, close) {
@@ -85,26 +93,66 @@ function spline(points = [], tension = 1, close = false, cb) {
 }
 
 function createCoordsTransformer(svg) {
-  const pt = svg.createSVGPoint();
+  const pt = svg.createSVGPoint()
 
   return function (e) {
-    pt.x = e.clientX;
-    pt.y = e.clientY;
+    pt.x = e.clientX
+    pt.y = e.clientY
 
-    return pt.matrixTransform(svg.getScreenCTM().inverse());
-  };
+    return pt.matrixTransform(svg.getScreenCTM().inverse())
+  }
 }
 
 function pointsInPath(path, numPoints = 10) {
-  const pathLength = path.getTotalLength();
-  const step = pathLength / numPoints;
-  const points = [];
+  const pathLength = path.getTotalLength()
+  const step = pathLength / numPoints
+  const points = []
 
   for (let i = 0; i < pathLength; i += step) {
-    points.push(path.getPointAtLength(i));
+    points.push(path.getPointAtLength(i))
   }
 
-  return points;
+  return points
 }
 
-export { spline, random, pointsInPath, createCoordsTransformer }
+function randomBias(min, max, bias, influence = 0.5) {
+  const base = random(min, max)
+  const mix = random(0, 1) * influence
+
+  return base * (1 - mix) + bias * mix
+}
+
+function relativeBounds(svg, HTMLElement) {
+  const { x, y, width, height } = HTMLElement.getBoundingClientRect()
+
+  const startPoint = svg.createSVGPoint()
+  startPoint.x = x
+  startPoint.y = y
+
+  const endPoint = svg.createSVGPoint()
+  endPoint.x = x + width
+  endPoint.y = y + height
+
+  const startPointTransformed = startPoint.matrixTransform(
+    svg.getScreenCTM().inverse()
+  )
+  const endPointTransformed = endPoint.matrixTransform(
+    svg.getScreenCTM().inverse()
+  )
+
+  return {
+    x: startPointTransformed.x,
+    y: startPointTransformed.y,
+    width: endPointTransformed.x - startPointTransformed.x,
+    height: endPointTransformed.y - startPointTransformed.y,
+  }
+}
+
+export {
+  spline,
+  random,
+  pointsInPath,
+  createCoordsTransformer,
+  randomBias,
+  relativeBounds,
+}

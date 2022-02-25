@@ -23,12 +23,31 @@ body {
   grid-template-rows: 10rem 1fr 5rem;
   min-height: 100vh;
   padding: 1rem;
+  position: relative;
+}
+
+#content {
+  width: 100%;
+  max-width: 60rem;
+  margin: auto;
+}
+
+main {
+  position: relative;
+  z-index: 1;
 }
 
 a {
   color: inherit;
 }
 
+.svg-background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  pointer-events: none;
+}
 
 //canvas {
 //  position: absolute;
