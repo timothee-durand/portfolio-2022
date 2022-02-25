@@ -9,11 +9,13 @@
 </template>
 <script>
 import ProjectPresentationMaster from '@/components/ProjectPresentation/ProjectPresentationMaster.js'
+import svgBackground from "@/mixins/svg-background.js";
 
 export default {
   data() {
     return {}
   },
+  mixins : [svgBackground],
   async asyncData({ $content }) {
     const projects = await $content('projects').fetch()
     return {

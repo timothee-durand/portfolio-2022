@@ -41,6 +41,14 @@ a {
   color: inherit;
 }
 
+.svg-background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
 //canvas {
 //  position: absolute;
 //  left: 0;

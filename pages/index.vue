@@ -10,7 +10,11 @@
 </template>
 
 <script>
-export default {}
+import svgBackground from "@/mixins/svg-background.js";
+
+export default {
+  mixins : [svgBackground]
+}
 </script>
 <style lang="scss">
 .hero {

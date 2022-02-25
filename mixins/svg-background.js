@@ -1,8 +1,3 @@
-<template>
-  <svg ref="svgBackground" class="svg-background" />
-</template>
-
-<script>
 import { SVG } from "@svgdotjs/svg.js";
 import { random } from "@/utils/generative-utils.js";
 
@@ -30,31 +25,28 @@ export default {
       colors: [],
       colorNumber: 10,
       strokeWidth: 3,
-      width: window.innerWidth,
-      height: document.documentElement.scrollHeight,
       marginWidth: 20,
       padding: 10,
       minY: 0,
-      maxY: this.height
+      maxY: this.height,
+      generatedForms: []
     };
   },
   mounted() {
     //init svg
-    this.svg = SVG(this.$refs.svgBackground);
+    this.svg = SVG().addTo("body");
+    this.svg.node.classList.add("svg-background");
     this.initForms();
     //add on resize handler
     window.addEventListener("resize", () => this.onResize());
   },
-  watch: {
-    "$route"() {
-      this.clear()
-      this.initForms()
-    }
+  destroyed() {
+    this.svg.node.remove();
   },
   computed: {},
   methods: {
     initForms() {
-      this.updateDimensions()
+      this.updateDimensions();
       this.getBoundingValues();
       this.setViewBox();
       this.setColorFromCss();
@@ -62,34 +54,37 @@ export default {
       this.addForms();
     },
     clear() {
-      this.$refs.svgBackground.innerHTML = ""
+      this.$refs.svgBackground.innerHTML = "";
     },
     getBoundingValues() {
       this.contentElement = document.querySelector(this.contentSelector);
       if (!this.contentElement) {
         return;
       }
-      const { width: contentWidth } = this.contentElement.getBoundingClientRect();
+      const { width: contentWidth } =
+        this.contentElement.getBoundingClientRect();
       this.marginWidth = (this.width - contentWidth) / 2;
 
       this.headerElement = document.querySelector(this.headerSelector);
-      const { bottom: headerBottom } = this.headerElement.getBoundingClientRect();
+      const { bottom: headerBottom } =
+        this.headerElement.getBoundingClientRect();
       this.minY = headerBottom;
 
       this.footerElement = document.querySelector(this.footerSelector);
-      const { height: footerHeight } = this.footerElement.getBoundingClientRect();
+      const { height: footerHeight } =
+        this.footerElement.getBoundingClientRect();
       this.maxY = this.height - footerHeight;
-
     },
     updateDimensions() {
       this.width = window.innerWidth;
       this.height = document.documentElement.scrollHeight;
     },
     onResize() {
-      this.updateDimensions()
+      this.updateDimensions();
       this.setViewBox();
     },
     setViewBox() {
+      console.log(this.svg);
       this.svg.viewbox(0, 0, this.width, this.height);
     },
     addForms() {
@@ -103,22 +98,49 @@ export default {
           max: this.width - this.padding
         }
       ];
-      const number = random(10, 20);
+      const number = random(20, 30);
       for (let i = 0; i < number; i++) {
         const side = random(sides);
         const form = this.getRandomForm();
         const { width, height } = form.node.getBoundingClientRect();
 
         let x = random(side.min, side.max);
-        let overtakingX = (x + width) - side.max;
-        if (overtakingX > 0) x = x - overtakingX - random(this.padding, this.padding * 1.2);
+        let overtakingX = x + width - side.max;
+        if (overtakingX > 0)
+          x = x - overtakingX - random(this.padding, this.padding * 1.2);
 
         let y = random(this.minY, this.maxY);
-        let overtakingY = (y + height) - this.maxY;
-        if (overtakingY > 0) y = y - overtakingY - random(this.padding, this.padding * 1.2);
+        let overtakingY = y + height - this.maxY;
+        if (overtakingY > 0)
+          y = y - overtakingY - random(this.padding, this.padding * 1.2);
 
         form.move(x, y);
+
+        if(this.isColliding(form)) {
+          form.remove()
+        }
+
+        this.generatedForms.push(form);
+
       }
+    },
+    isColliding(form) {
+      let isColliding = false;
+
+      const { x, y, x2, y2 } = form.bbox();
+
+      this.generatedForms.forEach(generatedForm => {
+        const { x: xG, y: yG, x2: x2G, y2: y2G } = generatedForm.bbox();
+
+        if((x > xG && x < x2G) || (y > yG && y < y2G) ||
+          (x2 > xG && x2 < x2G) || (y2 > yG && y2 < y2G))
+        {
+          //if collision
+          isColliding = true
+        }
+      });
+
+      return isColliding;
     },
     getRandomForm() {
       const size = random(20, 40);
@@ -164,20 +186,36 @@ export default {
       const group = this.svg.group();
       group
         .line(0, height / 2, width, height / 2)
-        .stroke({ width: this.strokeWidth, color: strokeColor, linecap: "round" });
+        .stroke({
+          width: this.strokeWidth,
+          color: strokeColor,
+          linecap: "round"
+        });
       group
         .line(width / 2, 0, width / 2, height)
-        .stroke({ width: this.strokeWidth, color: strokeColor, linecap: "round" });
+        .stroke({
+          width: this.strokeWidth,
+          color: strokeColor,
+          linecap: "round"
+        });
       return group;
     },
     cross2(width, height, strokeColor) {
       const group = this.svg.group();
       group
         .line(0, 0, width, height)
-        .stroke({ width: this.strokeWidth, color: strokeColor, linecap: "round" });
+        .stroke({
+          width: this.strokeWidth,
+          color: strokeColor,
+          linecap: "round"
+        });
       group
         .line(width, 0, 0, height)
-        .stroke({ width: this.strokeWidth, color: strokeColor, linecap: "round" });
+        .stroke({
+          width: this.strokeWidth,
+          color: strokeColor,
+          linecap: "round"
+        });
       return group;
     },
     circle(width, height, strokeColor) {
@@ -185,7 +223,11 @@ export default {
       group
         .ellipse(width, height)
         .fill("transparent")
-        .stroke({ width: this.strokeWidth, color: strokeColor, linecap: "round" });
+        .stroke({
+          width: this.strokeWidth,
+          color: strokeColor,
+          linecap: "round"
+        });
       return group;
     },
     flash(width, height, strokeColor) {
@@ -199,7 +241,11 @@ export default {
           [width * 0.55, height]
         ])
         .fill("transparent")
-        .stroke({ width: this.strokeWidth, color: strokeColor, linecap: "round" });
+        .stroke({
+          width: this.strokeWidth,
+          color: strokeColor,
+          linecap: "round"
+        });
       return group;
     },
     angle(width, height, color) {
@@ -216,13 +262,3 @@ export default {
     }
   }
 };
-</script>
-
-<style>
-.svg-background {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-}
-</style>

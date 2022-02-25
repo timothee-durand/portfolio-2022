@@ -117,7 +117,7 @@ export class ProjectPresentationThree {
 
       this.launchAnimation(text)
     })
-    console.log('---------')
+    // console.log('---------')
   }
 
   getRandomPosition() {
@@ -161,8 +161,8 @@ export class ProjectPresentationThree {
   }
 
   onResize() {
-    this.width = window.innerWidth
-    this.height = window.innerHeight
+    this.width = this.container.offsetWidth
+    this.height = this.container.offsetHeight
 
     this.camera.aspect = this.width / this.height
     this.camera.updateProjectionMatrix()
@@ -203,7 +203,7 @@ export class ProjectPresentationThree {
       rotationY: text.rotation.y,
       positionZ: text.position.z,
     }
-    console.log(text)
+    // console.log(text)
     gsap.to(text.scale, {
       x: text.randomScale,
       y: text.randomScale,

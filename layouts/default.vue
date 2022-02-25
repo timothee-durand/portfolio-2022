@@ -1,6 +1,5 @@
 <template>
   <div ref="root">
-    <client-only><svg-background content-selector="#content"/></client-only>
     <div id="app">
       <my-header />
       <Nuxt id="content" />
@@ -8,9 +7,7 @@
     </div>
   </div>
 </template>
-<style>
-
-</style>
+<style></style>
 <script>
 export default {
   mounted() {
@@ -24,6 +21,6 @@ export default {
     }
 
     document.body.classList.add(userPref)
-  },
+  }
 }
 </script>
