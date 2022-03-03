@@ -1,8 +1,8 @@
 <template>
-  <div class="project-presentation" :data-techno="getJsonData()">
-    <router-link :to="metadatas.path">
-      <blob :text="metadatas.title"></blob>
-    </router-link>
+  <div class="project-presentation" :data-techno="getJsonData()" :data-title="metadatas.title">
+<!--    <router-link :to="metadatas.path">-->
+<!--      <blob :text="metadatas.title"></blob>-->
+<!--    </router-link>-->
   </div>
 </template>
 <script>
@@ -29,7 +29,7 @@ export default {
 </script>
 <style lang="scss">
 .project-presentation {
-  width: 50rem;
+  width:40%;
   height: 40rem;
   display: flex;
   align-items: center;

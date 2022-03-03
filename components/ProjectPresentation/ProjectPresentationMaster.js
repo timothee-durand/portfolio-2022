@@ -17,10 +17,19 @@ export default class ProjectPresentationMaster {
   async initScenes() {
     const font = await this.loadFacetype()
 
+    const SVGObject = await import("three/examples/jsm/renderers/SVGRenderer.js")
+    const OrbitController = await import("three/examples/jsm/controls/OrbitControls.js")
+    const { TextGeometry } = await import("three/examples/jsm/geometries/TextGeometry.js");
+
     this.elements.forEach((e) => {
       e.projectPresentation = new ProjectPresentationThree({
         container: e,
         font,
+        dependencies : {
+          svgObject : SVGObject,
+          controls : OrbitController,
+          textGeometry : TextGeometry
+        }
       })
       // this.projectPresentations.push(new ProjectPresentation({ container: e }));
       this.observer.observe(e)

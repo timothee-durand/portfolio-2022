@@ -37,7 +37,6 @@ main {
   padding: 3rem;
 }
 main > * {
-  width: 30%;
   margin-top: 30rem;
 }
 
