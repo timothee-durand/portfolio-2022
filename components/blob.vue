@@ -11,7 +11,8 @@
 <script lang="js">
 import { SVG } from "@svgdotjs/svg.js";
 import {gsap} from "gsap";
-import { createCoordsTransformer, pointsInPath, random, spline } from "@/utils/generative-utils.js"
+import { createCoordsTransformer, pointsInPath, random, spline } from "@/js/utils/generative-utils.js"
+
 export default {
   name: "Blob",
   props: {
@@ -60,7 +61,7 @@ export default {
 
       for (let i = 1; i <= numPoints; i++) {
         // how much randomness should be added to each point
-        const pull = random(0.75, 1, true);
+        const pull = random(0.90, 1, true);
 
         // x & y coordinates of the current point
         const x = this.x + Math.cos(i * angleStep) * (this.size * pull);
@@ -70,24 +71,14 @@ export default {
         points.push({ x, y });
       }
 
-      // generate a smooth continuous curve based on the points, using bezier curves. spline() will return an svg path-data string. The arguments are (points, tension, close). Play with tension and check out the effect!
-      const pathData = spline(points, 1, true);
+      // // generate a smooth continuous curve based on the points, using bezier curves. spline() will return an svg path-data string. The arguments are (points, tension, close). Play with tension and check out the effect!
+      // const pathData = spline(points, 1, true);
+      //
+      // // render the body in the form of an svg <path /> element!
+      // const path = this.svg
+      //   .path(pathData)
+      //   .fill("var(--color-orange-yellow)");
 
-      // render the body in the form of an svg <path /> element!
-      const path = this.svg
-        .path(pathData)
-        .fill("var(--color-orange-yellow)");
-      console.log(path);
-      this.createLiquidPath(path.node,  {
-        detail: 40,
-        tension: 2,
-        close: true,
-        range: {
-          x: 20,
-          y: 20
-        },
-        axis: ["y"]
-      })
     },
     //from georges francis https://georgefrancis.dev/writing/create-a-liquid-hover-effect-with-gsap-and-svg/
     createLiquidPath(path, options) {
