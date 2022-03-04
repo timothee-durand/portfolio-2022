@@ -11,8 +11,8 @@
 <script lang="js">
 import { SVG } from "@svgdotjs/svg.js";
 import {gsap} from "gsap";
-import { createCoordsTransformer, pointsInPath, random, spline } from "@/utils/generative-utils.js"
-import { Shape } from "three";
+import { createCoordsTransformer, pointsInPath, random, spline } from "@/js/utils/generative-utils.js"
+
 export default {
   name: "Blob",
   props: {

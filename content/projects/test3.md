@@ -1,7 +1,7 @@
 ---
 title: test
 description: 'A super project'
-thumbnail: /projectFiles/placeholder-thumb.jpg
+thumbnail:  https://source.unsplash.com/random
 role:
   - Web developper
 year: 2020

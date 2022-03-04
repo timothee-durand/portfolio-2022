@@ -1,5 +1,5 @@
 import { SVG } from "@svgdotjs/svg.js";
-import { random } from "@/utils/generative-utils.js";
+import { random } from "@/js/utils/generative-utils.js";
 
 export default {
   name: "svg-background",
