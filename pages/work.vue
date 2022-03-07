@@ -1,6 +1,6 @@
 <template>
   <main ref="container">
-    <ProjectHeader/>
+    <ProjectList :project-list="projectList"></ProjectList>
   </main>
 </template>
 <script>
@@ -11,7 +11,13 @@ export default {
     return {};
   },
   mixins: [svgBackground],
-  methods: {}
+  methods: {},
+  async asyncData({ $content }) {
+    const projectList = await $content("projects").fetch();
+    return {
+      projectList
+    };
+  }
 };
 </script>
 <style scoped>
