@@ -84,15 +84,15 @@ export class ProjectGroup extends Group {
     cylinder.rotation.x = Math.PI / 2;
     titleGroup.add(cylinder);
 
-    const texture = new TextureLoader().load(this.project.thumbnail);
-    texture.flipY = false;
-    const circleGeometry = new CircleGeometry(2.5, 32);
-    const circleMaterial = new MeshBasicMaterial({ map: texture });
-
-    const circle = new Mesh(circleGeometry, circleMaterial);
-    circle.position.z = -0.52;
-    circle.rotation.y = Math.PI;
-    titleGroup.add(circle);
+    // const texture = new TextureLoader().load(this.project.thumbnail);
+    // texture.flipY = false;
+    // const circleGeometry = new CircleGeometry(2.5, 32);
+    // const circleMaterial = new MeshBasicMaterial({ map: texture });
+    //
+    // const circle = new Mesh(circleGeometry, circleMaterial);
+    // circle.position.z = -0.52;
+    // circle.rotation.y = Math.PI;
+    // titleGroup.add(circle);
 
 
     const text = this.createTextGeometry(this.dependencies.textGeometry, this.project.title, "");

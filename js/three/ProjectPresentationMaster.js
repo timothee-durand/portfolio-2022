@@ -1,5 +1,5 @@
 import { ProjectGroup } from "./ProjectGroup.js";
-import { Clock, OrthographicCamera, PerspectiveCamera, Raycaster, Scene, Vector2, WebGLRenderer } from "three";
+import { Clock, PerspectiveCamera, Raycaster, Scene, Vector2, WebGLRenderer } from "three";
 import { Elastic, gsap } from "gsap";
 
 
@@ -132,14 +132,15 @@ export default class ProjectPresentationMaster {
           textGeometry: TextGeometry
         }
       });
-      const size = 0.4;
+      const size = 0.5;
       projectGroup.scale.set(size, size, size);
-      projectGroup.position.y = rowIndex * -6;
+      projectGroup.position.y = rowIndex * -8;
+
       if (index % 2) {
-        projectGroup.position.x = -3;
+        projectGroup.position.x = -4;
         rowIndex++;
       } else {
-        projectGroup.position.x = 3;
+        projectGroup.position.x = 4;
 
       }
 
@@ -235,40 +236,42 @@ export default class ProjectPresentationMaster {
 
 
   hoverTitleGroup(object, hoverState) {
-    console.log(object, hoverState);
+//    console.log(object, hoverState);
     switch (hoverState) {
       case HOVER_ENTER :
-        gsap.to(object.rotation, {
+        gsap.to(object.scale, {
           onStart: () => {
             object.isAnimating = true;
             this.container.style.cursor = "pointer";
           },
-          x: Math.PI,
-          duration: 2,
+          x: 1.3,
+          y: 1.3,
+          z: 1.3,
+          duration: 1,
           ease: Elastic.easeOut,
           onComplete: () => {
             object.isAnimating = false;
-
           }
         });
-
         break;
-
+/*      case HOVER_IN :
+        this.container.style.cursor = "pointer";
+        break;*/
       case HOVER_OUT :
-        gsap.to(object.rotation, {
+        gsap.to(object.scale, {
           onStart: () => {
             object.isAnimating = true;
             this.container.style.cursor = "inherit";
           },
-          x: 0,
-          duration: 2,
+          x: 1,
+          y: 1,
+          z: 1,
+          duration: 1.5,
           ease: Elastic.easeOut,
           onComplete: () => {
             object.isAnimating = false;
-            object.isScreenFace = false;
           }
         });
-
         break;
     }
   }

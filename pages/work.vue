@@ -1,6 +1,6 @@
 <template>
   <main ref="container">
-    <Projects/>
+    <ProjectHeader/>
   </main>
 </template>
 <script>
