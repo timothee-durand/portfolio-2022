@@ -1,7 +1,7 @@
 ---
-title: test
+title: coucou
 description: 'A super project'
-thumbnail: https://source.unsplash.com/random
+thumbnail: /project-images/test.jpg
 role:
   - Web developper
 year: 2020
