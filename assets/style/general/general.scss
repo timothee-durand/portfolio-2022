@@ -22,7 +22,6 @@ body {
   display: grid;
   grid-template-rows: 10rem 1fr 5rem;
   min-height: 100vh;
-  padding: 1rem;
   position: relative;
 }
 
@@ -30,6 +29,8 @@ body {
   width: 100%;
   max-width: 80rem;
   margin: auto;
+  padding: 0 2rem;
+  min-height: 100%;
 }
 
 main {
