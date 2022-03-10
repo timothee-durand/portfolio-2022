@@ -9,18 +9,26 @@
 </template>
 <style></style>
 <script>
+import {mapMutations} from "vuex"
 export default {
   mounted() {
     const userPrefersDark =
       window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-    let userPref = 'light'
     if (userPrefersDark) {
-      userPref = 'dark'
+      this.setDarkMode();
+      return;
     }
 
-    document.body.classList.add(userPref)
+    this.setLightMode();
+
+  },
+  methods: {
+    ...mapMutations({
+      setDarkMode: "setDarkMode",
+      setLightMode: "setLightMode"
+    })
   }
-}
+};
 </script>

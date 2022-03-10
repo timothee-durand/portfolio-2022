@@ -1,5 +1,5 @@
 <template>
-  <button type="button" class="switch-theme" @click="changeTheme">
+  <button type="button" class="switch-theme" @click="toggleMode">
     <MoonSvg class="switch-theme__moon switch-theme__svg" />
     <SunSvg class="switch-theme__sun switch-theme__svg" />
   </button>
@@ -7,19 +7,14 @@
 <script>
 import MoonSvg from '~/assets/images/moon.svg?inline'
 import SunSvg from '~/assets/images/sun.svg?inline'
+import { mapMutations } from "vuex";
 export default {
   name: 'SwitchTheme',
   components: { MoonSvg, SunSvg },
   methods: {
-    changeTheme() {
-      if (document.body.classList.contains('dark')) {
-        document.body.classList.remove('dark')
-        document.body.classList.add('light')
-      } else {
-        document.body.classList.add('dark')
-        document.body.classList.remove('light')
-      }
-    },
+    ...mapMutations({
+      toggleMode : "toggleMode"
+    })
   },
 }
 </script>
@@ -40,11 +35,11 @@ export default {
   }
 }
 
-.dark .switch-theme__moon {
+body[data-theme="dark"] .switch-theme__moon {
   display: none;
 }
 
-.light .switch-theme__sun {
+body[data-theme="light"] .switch-theme__sun {
   display: none;
 }
 </style>

@@ -14,11 +14,13 @@ export default {
     DarkThemeLogo,
     LightThemeLogo,
   },
+  methods: {
+  }
 }
 </script>
 <style lang="scss">
-body.light .logo__dark,
-body.dark .logo__light {
+body[data-theme="light"] .logo__dark,
+body[data-theme="dark"] .logo__light {
   display: none;
 }
 </style>
