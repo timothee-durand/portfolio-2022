@@ -3,7 +3,8 @@
     <div
       class="project"
       v-for="(project,i) in projectList">
-      <img :src="project.thumbnail" :alt="`Project ${project.title}'s thumbnail`" class="project--thumbnail" />
+      <my-image :image-url="project.thumbnail" class="project--thumbnail"/>
+<!--      <img :src="project.thumbnail" :alt="`Project ${project.title}'s thumbnail`" class="project&#45;&#45;thumbnail" />-->
       <div class="project--text">
         <my-text class="project--title" type="medium">{{ project.title }}</my-text>
         <div class="project--techs">
@@ -12,7 +13,6 @@
       </div>
      <my-button :to="project.path" :key="project.title + i" class="project--link" text="About it"/>
     </div>
-
   </div>
 </template>
 

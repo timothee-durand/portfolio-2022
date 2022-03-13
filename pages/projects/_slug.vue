@@ -25,7 +25,7 @@
         <nuxt-content class="project--article" :document="content" />
       </div>
     </div>
-    <img class="single-project--thumbnail" :src="content.thumbnail" />
+    <my-image class="single-project--thumbnail" :image-url="content.thumbnail"/>
     <my-text v-if="content.link" tag="a" :href="content.link" type="link--blank" class="single-project-link">Discover</my-text>
   </article>
 </template>

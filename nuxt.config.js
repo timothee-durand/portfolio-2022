@@ -52,5 +52,20 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['@svgdotjs/svg.js'],
+    extend(config, { isClient }) {
+      // Extend only webpack config for client-bundle
+      // if (isClient) {
+      //   config.devtool = 'source-map'
+      // }
+     // console.log(config.module.rules);
+      config.module.rules.push( {
+        test: /\.(glsl|vs|fs|vert|frag)$/,
+        exclude: /node_modules/,
+        use: [
+          'raw-loader',
+          'glslify-loader'
+        ]
+      })
+    }
   },
 }
