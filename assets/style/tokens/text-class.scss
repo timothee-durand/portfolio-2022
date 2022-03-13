@@ -1,17 +1,53 @@
 @import 'text-mixins';
 
-.text--big {
+.text--big-title {
   @include text-style-big-title;
 }
 
-.text--medium {
+.text--medium-title {
   @include text-style-medium-title;
 }
 
-.text--small {
+.text--small-title {
   @include text-style-small-title;
 }
 
 .text--bold {
   @include text-style-bold;
+}
+
+
+.text--small {
+  @include text-style-small;
+}
+
+.text--link, .text--link--blank {
+  @include text-style-small-title;
+  transition: color ease-out 200ms;
+
+  &:hover {
+    color: var(--color-orange-yellow);
+  }
+}
+.text--link--blank {
+  display: flex;
+  align-items: center;
+
+  &::after {
+    content:"";
+    height: 2.7rem;
+    width: 2.7rem;
+    margin-left: 1rem;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(~/assets/images/external.svg);
+  }
+
+  &:hover {
+
+    &::after {
+    }
+  }
+
 }
