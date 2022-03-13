@@ -6,6 +6,7 @@
 @mixin text-base {
   text-decoration: none;
   font-style: normal;
+  line-height: 1.5;
 }
 
 @mixin text-style-big-title {
@@ -40,5 +41,12 @@
   font-size: 1.6rem;
   font-family: var(--font-text);
   font-weight: 700;
+  @include text-base;
+}
+
+@mixin text-style-small {
+  font-size: 1.4rem;
+  font-family: var(--font-text);
+  font-weight: 300;
   @include text-base;
 }

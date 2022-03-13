@@ -1,6 +1,6 @@
 <template>
   <router-link :to="to" class="button"  @mouseenter.native="mouseEnter" @mouseleave.native="mouseLeave">
-    <my-text tag="span" type="small" class="button--text">{{ text }}</my-text>
+    <my-text tag="span" :type="textType" class="button--text">{{ text }}</my-text>
     <svg ref="background"  width="130" height="130"
          viewBox="0 0 130 130" fill="none"
          xmlns="http://www.w3.org/2000/svg">
@@ -14,7 +14,6 @@
               fill="#EFCB68" />
       </defs>
     </svg>
-
   </router-link>
 </template>
 <script>
@@ -29,6 +28,10 @@ export default {
     text: {
       type: String,
       default: "About it"
+    },
+    textType : {
+      type : String,
+      default : "small"
     }
   },
   mounted() {
