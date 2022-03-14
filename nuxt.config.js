@@ -1,3 +1,5 @@
+import opn from "opn";
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -48,6 +50,12 @@ export default {
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {},
+
+  hooks: {
+    listen(server, { host, port }) {
+      opn(`http://${host}:${port}`)
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

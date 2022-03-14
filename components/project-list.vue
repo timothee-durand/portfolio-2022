@@ -2,7 +2,10 @@
   <div class="projects-list">
     <div
       class="project"
-      v-for="(project,i) in projectList">
+      v-for="(project,i) in projectList"
+      @mouseenter="onProjectMouseEnter"
+      @mouseleave="onProjectMouseLeave"
+    >
       <my-image :image-url="project.thumbnail" class="project--thumbnail"/>
 <!--      <img :src="project.thumbnail" :alt="`Project ${project.title}'s thumbnail`" class="project&#45;&#45;thumbnail" />-->
       <div class="project--text">
@@ -27,6 +30,14 @@ export default {
         return [{ title: "Project Title", techs: ["VueJS"], path: "/projects/project-title" }];
       }
     }
+  },
+  methods : {
+    onProjectMouseEnter(e) {
+      console.log(e);
+    },
+    onProjectMouseLeave(e) {
+
+    }
   }
 
 };
@@ -44,6 +55,28 @@ export default {
 .project {
   border-top: var(--color-text) 1px solid;
   padding: 2rem 0;
+
+  &:hover .project--link{
+    animation: heartBeat infinite ease-in-out 1500ms;
+  }
+}
+
+@keyframes heartBeat {
+  30% {
+    transform: scale(1.1);
+  }
+
+  35% {
+    transform: scale(1);
+  }
+
+ 50% {
+    transform: scale(1.05);
+  }
+
+  55% {
+    transform: scale(1);
+  }
 }
 
 .project--thumbnail {
@@ -76,6 +109,10 @@ export default {
 
 .project--link {
   margin: auto;
+
+  &:hover {
+    animation-play-state: paused !important;
+  }
 }
 @include tablet {
   .project {
