@@ -1,4 +1,4 @@
-import opn from "opn";
+import gsap from "gsap";
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -11,7 +11,7 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' },
+       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
@@ -22,6 +22,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
   ],
+
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -51,15 +52,10 @@ export default {
   // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {},
 
-  hooks: {
-    listen(server, { host, port }) {
-      opn(`http://${host}:${port}`)
-    }
-  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ['@svgdotjs/svg.js'],
+    transpile: ['@svgdotjs/svg.js', 'gsap'],
     extend(config, { isClient }) {
       // Extend only webpack config for client-bundle
       // if (isClient) {

@@ -60,7 +60,7 @@ export default {
       lastElapsedTime : 0
     };
   },
-  computed: mapState(["themeMode"]),
+  // computed: mapState(["themeMode"]),
   async mounted() {
     this.container = this.$refs.canvas;
     this.width = this.container.offsetWidth;
@@ -157,7 +157,7 @@ export default {
 
       if (this.controls) this.controls.update();
      if (this.titleObject) {
-        if (this.themeMode === DARK_MODE) {
+        if (this.$store.state.themeMode === DARK_MODE) {
           this.titleObject.material.color = new Color("#E1EFE6");
         } else {
           this.titleObject.material.color = new Color("#000411");
@@ -181,10 +181,10 @@ export default {
     async loadTextures() {
       const textures = {};
       //roughnessMap
-      textures.roughness = await this.loadTexture(wallDirName, "wall-roughness.jpg");
-      textures.roughness.wrapS = RepeatWrapping;
-      textures.roughness.wrapT = RepeatWrapping;
-      textures.roughness.repeat.set(4, 4);
+      // textures.roughness = await this.loadTexture(wallDirName, "wall-roughness.jpg");
+      // textures.roughness.wrapS = RepeatWrapping;
+      // textures.roughness.wrapT = RepeatWrapping;
+      // textures.roughness.repeat.set(4, 4);
 
       //particles sprites
       textures.eclair1 = await this.loadTexture(particlesSpritesDirName, "eclair-1.png");
@@ -242,9 +242,6 @@ export default {
       const r = 3;
 
       for (let i = 0; i < random(5, 10); i++) {
-        /*    const x = areaSize * Math.random() - (areaSize / 2);
-            const y = areaSize * Math.random() - (areaSize / 2);
-            const z = areaSize * Math.random() - (areaSize / 2);*/
         const angle = Math.random() * Math.PI * 2;
         const x = Math.cos(angle) * r;
         const y = Math.sin(angle) * r;
@@ -269,11 +266,7 @@ export default {
       for (let i = 0; i < textures.length; i++) {
         const material = new PointsMaterial({
           size: 0.3,
-          // sizeAttenuation: false,
-          // color: "white",
-          // alphaTest: 0.5,
           transparent: true,
-          // depthTest : false,
           map: textures[i],
           blending: AdditiveBlending
         });

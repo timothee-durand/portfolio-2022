@@ -2,7 +2,8 @@ export const LIGHT_MODE = "light";
 export const DARK_MODE = "dark";
 
 export const state = () => ({
-  themeMode: LIGHT_MODE
+  themeMode: LIGHT_MODE,
+  transitionComponent : null
 });
 
 export const getters = () => ({
@@ -24,7 +25,15 @@ export const mutations = {
       return;
     }
     state.themeMode = DARK_MODE;
-  }
+  },
+  setTransitionComponent(state, component) {
+    state.transitionComponent = component;
+  },
+  resetTransitionComponent(state) {
+    if(!state.transitionComponent) return
+    state.transitionComponent.isTransitionLink = false
+    state.transitionComponent = null
+  },
 };
 
 const syncBodyDataThemePlugin = (store) => {

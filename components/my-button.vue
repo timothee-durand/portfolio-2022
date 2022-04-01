@@ -1,7 +1,13 @@
 <template>
-  <router-link :to="to" class="button"  @mouseenter.native="mouseEnter" @mouseleave.native="mouseLeave">
+  <nuxt-link
+    :to="to" class="button"
+    @mouseenter.native="mouseEnter"
+    @mouseleave.native="mouseLeave"
+    @click.native="setTransitionLink"
+    :class="{'is-transition-link' : this.isTransitionLink}"
+  >
     <my-text tag="span" :type="textType" class="button--text">{{ text }}</my-text>
-    <svg ref="background"  width="130" height="130"
+    <svg ref="background" width="130" height="130"
          viewBox="0 0 130 130" fill="none"
          xmlns="http://www.w3.org/2000/svg">
       <path
@@ -14,10 +20,12 @@
               fill="#EFCB68" />
       </defs>
     </svg>
-  </router-link>
+  </nuxt-link>
 </template>
 <script>
 import anime from "animejs";
+import transition from "@/mixins/transition.js";
+
 export default {
   name: "MyButton",
   props: {
@@ -29,53 +37,72 @@ export default {
       type: String,
       default: "About it"
     },
-    textType : {
-      type : String,
-      default : "small"
+    textType: {
+      type: String,
+      default: "small"
     }
   },
+  mixins: [
+    transition
+  ],
   mounted() {
     this.animation = anime({
       targets: this.$refs.normalPath,
       duration: 200,
       autoplay: false,
-      easing : "easeInOutQuad",
+      easing: "easeInOutQuad",
       d: this.$refs.animatedPath.getAttribute("d")
     });
   },
   methods: {
     mouseEnter() {
-      console.log("coucou");
       this.animation.play();
     },
     mouseLeave() {
-      console.log("coucou");
       this.animation.reverse();
       this.animation.play();
-      this.animation.finished.then(()=> {
-        this.animation.reverse()
-      })
+      this.animation.finished.then(() => {
+        this.animation.reverse();
+      });
 
     }
+
   }
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 .button {
   display: block;
   position: relative;
   width: 13rem;
   height: 13rem;
+
+  svg {
+    position: relative;
+  }
+
+  &--text {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    padding: 0.5rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--color-rich-black);
+    pointer-events: none;
+    transition: opacity ease-out 100ms;
+  }
+
+
 }
 
-.button--text {
-  position: absolute;
-  width: 100%;
-  padding: 0.5rem;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: var(--color-rich-black);
+.is-transitioning {
+  .button--text {
+    opacity: 0;
+  }
 }
+
+
 </style>
