@@ -1,11 +1,9 @@
 <template>
   <header class="header u--d-flex u--justify-between">
-    <nuxt-link to="/">
-      <Logo></Logo>
-    </nuxt-link>
+    <nuxt-link to="/"><Logo/></nuxt-link>
     <div class="header__links">
-      <nuxt-link to="/work">Work</nuxt-link>
-      <nuxt-link to="#">About</nuxt-link>
+      <header-link to="/projects">Work</header-link>
+      <header-link to="#">About</header-link>
       <SwitchTheme />
     </div>
   </header>
@@ -16,10 +14,25 @@ export default {
 }
 </script>
 <style lang="scss">
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 100;
+  transition: opacity ease-out 200ms;
+  padding: 1rem 2rem;
+}
 .header__links {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem;
   align-items: center;
+}
+
+.is-content-transition {
+  header {
+    opacity: 0;
+  }
 }
 </style>

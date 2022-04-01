@@ -68,7 +68,7 @@ export default {
       this.scene.add(this.light);
 
       this.update();
-      console.log(this.scene);
+     // console.log(this.scene);
     },
     loadTexture() {
       this.textureLoader = new TextureLoader();
@@ -84,7 +84,7 @@ export default {
       this.width = this.container.offsetWidth;
       this.ratio = this.texture.image.naturalHeight / this.texture.image.naturalWidth;
       this.height = this.ratio * this.width
-      console.log(this.width, this.height);
+   //   console.log(this.width, this.height);
     },
     onPointerMove(e) {
       if (this.isPhone) return;

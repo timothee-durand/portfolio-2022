@@ -33,7 +33,7 @@ export default {
   },
   methods : {
     onProjectMouseEnter(e) {
-      console.log(e);
+      //console.log(e);
     },
     onProjectMouseLeave(e) {
 

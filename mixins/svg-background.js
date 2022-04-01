@@ -36,9 +36,9 @@ export default {
     //init svg
     this.svg = SVG().addTo("body");
     this.svg.node.classList.add("svg-background");
-    this.initForms();
-    //add on resize handler
-    window.addEventListener("resize", () => this.onResize());
+    // this.initForms();
+    // //add on resize handler
+    // window.addEventListener("resize", () => this.onResize());
   },
   destroyed() {
     this.svg.node.remove();
