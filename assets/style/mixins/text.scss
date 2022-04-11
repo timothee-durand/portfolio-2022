@@ -10,9 +10,13 @@
 }
 
 @mixin text-style-big-title {
-  font-size: 14.4rem;
   font-family: var(--font-title);
   font-weight: normal;
+  font-size: 7rem;
+
+  @media (min-width: 1000px) {
+    font-size: 14.4rem;
+  }
   @include text-base;
 }
 

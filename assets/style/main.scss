@@ -1,7 +1,10 @@
+//MIXINS
+@import "mixins/breakpoints";
+@import 'mixins/text';
+
 // TOKENS
 @import 'tokens/colors';
 @import 'tokens/text-class';
-@import 'tokens/text-mixins';
 @import 'tokens/fonts';
 
 //RESET
@@ -14,5 +17,4 @@
 @import 'general/general';
 @import 'general/page-transition';
 
-//MIXINS
-@import "general/media-queries";
+

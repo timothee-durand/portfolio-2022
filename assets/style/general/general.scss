@@ -1,4 +1,4 @@
-@import '../tokens/text-mixins';
+@import '../mixins/text';
 @import '../tokens/colors';
 
 body[data-theme="dark"] {
@@ -28,7 +28,6 @@ body {
 #content {
   width: 100%;
   margin: auto;
-  padding: 0 2rem;
   min-height: 100%;
 }
 

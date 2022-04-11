@@ -1,5 +1,4 @@
-@import 'text-mixins';
-
+@import '../mixins/text';
 .text--big-title {
   @include text-style-big-title;
 }
