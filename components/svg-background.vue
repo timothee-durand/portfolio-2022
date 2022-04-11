@@ -8,6 +8,12 @@ import { SVG } from "@svgdotjs/svg.js";
 
 export default {
   name: "svg-background",
+  props: {
+    formProba: {
+      type: Number,
+      default: 7
+    }
+  },
   data() {
     return {
       forms: [this.cross, this.circle, this.cross2, this.flash, this.angle],
@@ -62,7 +68,7 @@ export default {
     addForms() {
       for (let i = 0; i < this.rowNumber; i++) {
         //decide if there is a form
-        if (random(0, 10) > 7) {
+        if (random(0, 10) > this.formProba) {
           const size = random(20, 30);
           const form = this.getRandomForm()(size, size, this.getRandomColor());
           form.move(random(0, this.width - size - this.padding, true) + this.padding, this.rowHeight * i + this.padding);

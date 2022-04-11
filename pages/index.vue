@@ -1,17 +1,39 @@
 <template>
-  <div class="hero u--d-flex u--justify-center">
-    <my-text tag="h1" type="big-title" class="u--align-center">
-      Timothée Durand <br />
-      French Web Developper
-    </my-text>
+  <div>
+    <div class="hero">
+      <svg-background form-proba="8" />
+      <my-text tag="h1" type="big-title" class="hero-title">
+        Timothée Durand <br />
+        French Web Developper
+      </my-text>
+      <svg-background form-proba="8" />
+    </div>
+
+    <my-text tag="h2" type="medium-title">selected works</my-text>
+    <project-list :project-list="projectList"/>
   </div>
+
+
 </template>
 
 <script>
-export default {};
+export default {
+  async asyncData({ $content }) {
+    const projectList = await $content("projects").fetch();
+    return {
+      projectList
+    };
+  }
+};
 </script>
 <style lang="scss">
 .hero {
-  min-height: calc(100vh - 17rem);
+  display: grid;
+  grid-template-rows: 1fr min-content 1fr;
+  min-height: 70vh;
+  width: 100%;
+  &-title {
+
+  }
 }
 </style>
