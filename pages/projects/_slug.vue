@@ -42,16 +42,25 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "~/assets/style/tokens/text-mixins.scss";
+@import "~/assets/style/mixins/text";
+@import "~/assets/style/mixins/breakpoints";
+
 .project-presentation {
   display: grid;
-  grid-template-columns: 0.5fr 1fr;
-  grid-gap: 6rem;
   margin-top: 2rem;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
+
+  @include tablet {
+    grid-template-columns: 0.5fr 1fr;
+    grid-gap: 6rem;
+    margin-bottom: 5rem;
+  }
 
   .project-presentation--aside {
-    text-align: right;
+
+    @include tablet {
+      text-align: right;
+    }
 
     .project-metas {
       background-color: var(--color-orange-yellow);
@@ -60,10 +69,13 @@ export default {
       -webkit-border-radius: 1rem;
       -moz-border-radius: 1rem;
       border-radius: 1rem;
+      margin-block-end: 2rem;
     }
 
     .project-meta {
       margin-block-end: 1rem;
+      max-width: 20rem;
+      margin: auto;
     }
 
 
