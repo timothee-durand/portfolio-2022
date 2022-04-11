@@ -74,35 +74,54 @@ export default {
 .button {
   display: block;
   position: relative;
-  width: 13rem;
-  height: 13rem;
-
-  svg {
-    position: relative;
-  }
+  padding: 1rem 2rem;
+  background-color: var(--color-orange-yellow);
+  max-width: max-content;
+  border-radius: 20px;
 
   &--text {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    padding: 0.5rem;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+    font-weight: bold;
     color: var(--color-rich-black);
-    pointer-events: none;
-    transition: opacity ease-out 100ms;
+  }
+
+  svg {
+    display: none;
+  }
+
+  @media (min-width: 1000px) {
+    width: 13rem;
+    height: 13rem;
+
+    svg {
+      display: block;
+      position: relative;
+    }
+
+    &--text {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      padding: 0.5rem;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      pointer-events: none;
+      transition: opacity ease-out 100ms;
+    }
+
+    .is-transitioning {
+      .button--text {
+        opacity: 0;
+      }
+    }
+
+
   }
 
 
 }
 
-.is-transitioning {
-  .button--text {
-    opacity: 0;
-  }
-}
 
 
 </style>

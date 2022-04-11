@@ -6,15 +6,15 @@
       @mouseenter="onProjectMouseEnter"
       @mouseleave="onProjectMouseLeave"
     >
-      <my-image :image-url="project.thumbnail" class="project--thumbnail"/>
-<!--      <img :src="project.thumbnail" :alt="`Project ${project.title}'s thumbnail`" class="project&#45;&#45;thumbnail" />-->
+      <my-image :image-url="project.thumbnail" class="project--thumbnail" />
+      <!--      <img :src="project.thumbnail" :alt="`Project ${project.title}'s thumbnail`" class="project&#45;&#45;thumbnail" />-->
       <div class="project--text">
-        <my-text class="project--title" type="medium">{{ project.title }}</my-text>
+        <my-text class="project--title" type="medium-title" tag="h3">{{ project.title }}</my-text>
         <div class="project--techs">
           <my-text class="project--techs--item" v-for="(tech, i) in project.techs" :key="tech + i">{{ tech }}</my-text>
         </div>
       </div>
-     <my-button :to="project.path" :key="project.title + i" class="project--link" text="About it"/>
+      <my-button :to="project.path" :key="project.title + i" class="project--link" text="About it" />
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
       }
     }
   },
-  methods : {
+  methods: {
     onProjectMouseEnter(e) {
       //console.log(e);
     },
@@ -56,8 +56,10 @@ export default {
   border-top: var(--color-text) 1px solid;
   padding: 2rem 0;
 
-  &:hover .project--link{
-    animation: heartBeat infinite ease-in-out 1500ms;
+  @include can-hover {
+    &:hover .project--link {
+      animation: heartBeat infinite ease-in-out 1500ms;
+    }
   }
 }
 
@@ -70,7 +72,7 @@ export default {
     transform: scale(1);
   }
 
- 50% {
+  50% {
     transform: scale(1.05);
   }
 
@@ -108,12 +110,15 @@ export default {
 }
 
 .project--link {
-  margin: auto;
 
-  &:hover {
-    animation-play-state: paused !important;
+  @include can-hover {
+    &:hover {
+      animation-play-state: paused !important;
+    }
   }
+
 }
+
 @include tablet {
   .project {
     display: grid;
