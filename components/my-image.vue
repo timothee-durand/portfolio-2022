@@ -116,15 +116,6 @@ export default {
       window.requestAnimationFrame(() => this.update());
     },
     addImage() {
-
-      // this.scene.add(
-      //   new Mesh(
-      //     new BoxGeometry(1, 1, 1),
-      //     new MeshNormalMaterial()
-      //   )
-      // )
-
-
       this.plane = new Mesh(
         new PlaneGeometry(11, this.ratio *11),
         new ShaderMaterial({

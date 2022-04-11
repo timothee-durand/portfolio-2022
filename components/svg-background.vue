@@ -1,22 +1,13 @@
+<template>
+  <div ref="container" class="svg-side"></div>
+</template>
+
+<script>
+import { random } from "~/js/utils/generative-utils.js";
 import { SVG } from "@svgdotjs/svg.js";
-import { random } from "@/js/utils/generative-utils.js";
 
 export default {
   name: "svg-background",
-  props: {
-    contentSelector: {
-      type: String,
-      default: "#content"
-    },
-    headerSelector: {
-      type: String,
-      default: "header"
-    },
-    footerSelector: {
-      type: String,
-      default: "footer"
-    }
-  },
   data() {
     return {
       forms: [this.cross, this.circle, this.cross2, this.flash, this.angle],
@@ -29,122 +20,62 @@ export default {
       padding: 10,
       minY: 0,
       maxY: this.height,
-      generatedForms: []
+      generatedForms: [],
+      svg: null,
+      rowNumber: 10,
+      rowHeight: 0
     };
   },
   mounted() {
     //init svg
-    this.svg = SVG().addTo("body");
+    this.svg = SVG().addTo(this.$refs.container);
     this.svg.node.classList.add("svg-background");
     this.initForms();
     //add on resize handler
-    window.addEventListener("resize", () => this.onResize());
+    // window.addEventListener("resize", () => this.onResize());
+    this.$nuxt.$on("pageLeaved", () => {
+      this.clear();
+      this.initForms();
+    });
   },
-  destroyed() {
-    this.svg.node.remove();
-  },
-  computed: {},
   methods: {
     initForms() {
       this.updateDimensions();
-      this.getBoundingValues();
-      this.setViewBox();
+      // this.getBoundingValues();
+      // this.setViewBox();
       this.setColorFromCss();
       this.generateColorPallet();
       this.addForms();
     },
     clear() {
-      this.$refs.svgBackground.innerHTML = "";
-    },
-    getBoundingValues() {
-      this.contentElement = document.querySelector(this.contentSelector);
-      if (!this.contentElement) {
-        return;
-      }
-      const { width: contentWidth } =
-        this.contentElement.getBoundingClientRect();
-      this.marginWidth = (this.width - contentWidth) / 2;
-
-      this.headerElement = document.querySelector(this.headerSelector);
-      const { bottom: headerBottom } =
-        this.headerElement.getBoundingClientRect();
-      this.minY = headerBottom;
-
-      this.footerElement = document.querySelector(this.footerSelector);
-      const { height: footerHeight } =
-        this.footerElement.getBoundingClientRect();
-      this.maxY = this.height - footerHeight;
+      this.svg.node.innerHTML = "";
     },
     updateDimensions() {
-      this.width = window.innerWidth;
-      this.height = document.documentElement.scrollHeight;
+      this.width = this.$refs.container.offsetWidth;
+      this.height = this.$refs.container.offsetHeight;
+      this.rowHeight = this.height / this.rowNumber;
     },
     onResize() {
       this.updateDimensions();
       this.setViewBox();
     },
-    setViewBox() {
-      console.log(this.svg);
-      this.svg.viewbox(0, 0, this.width, this.height);
-    },
     addForms() {
-      const sides = [
-        {
-          min: this.padding,
-          max: this.marginWidth - this.padding
-        },
-        {
-          min: this.width - this.marginWidth + this.padding,
-          max: this.width - this.padding
+      for (let i = 0; i < this.rowNumber; i++) {
+        //decide if there is a form
+        if (random(0, 10) > 7) {
+          const size = random(20, 30);
+          const form = this.getRandomForm()(size, size, this.getRandomColor());
+          form.move(random(0, this.width - size - this.padding, true) + this.padding, this.rowHeight * i + this.padding);
+          form.rotation = random(0, 360, true);
+          form.transform({
+            rotate: form.rotation
+          });
         }
-      ];
-      const number = random(20, 30);
-      for (let i = 0; i < number; i++) {
-        const side = random(sides);
-        const form = this.getRandomForm();
-        const { width, height } = form.node.getBoundingClientRect();
-
-        let x = random(side.min, side.max);
-        let overtakingX = x + width - side.max;
-        if (overtakingX > 0)
-          x = x - overtakingX - random(this.padding, this.padding * 1.2);
-
-        let y = random(this.minY, this.maxY);
-        let overtakingY = y + height - this.maxY;
-        if (overtakingY > 0)
-          y = y - overtakingY - random(this.padding, this.padding * 1.2);
-
-        form.move(x, y);
-
-        if(this.isColliding(form)) {
-          form.remove()
-        }
-
-        this.generatedForms.push(form);
-
       }
     },
-    isColliding(form) {
-      let isColliding = false;
 
-      const { x, y, x2, y2 } = form.bbox();
-
-      this.generatedForms.forEach(generatedForm => {
-        const { x: xG, y: yG, x2: x2G, y2: y2G } = generatedForm.bbox();
-
-        if((x > xG && x < x2G) || (y > yG && y < y2G) ||
-          (x2 > xG && x2 < x2G) || (y2 > yG && y2 < y2G))
-        {
-          //if collision
-          isColliding = true
-        }
-      });
-
-      return isColliding;
-    },
     getRandomForm() {
-      const size = random(20, 40);
-      return random(this.forms)(size, size, this.getRandomColor());
+      return random(this.forms);
     },
     tweakColor({ h, s, l }) {
       return {
@@ -261,4 +192,10 @@ export default {
       return group;
     }
   }
+
 };
+</script>
+
+<style lang="scss">
+
+</style>

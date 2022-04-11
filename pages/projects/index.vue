@@ -1,16 +1,15 @@
 <template>
-  <main ref="container">
+  <div ref="container">
     <ProjectList :project-list="projectList"></ProjectList>
-  </main>
+  </div>
 </template>
 <script>
-import svgBackground from "@/mixins/svg-background.js";
 
 export default {
   data() {
     return {};
   },
-  mixins: [svgBackground],
+  mixins: [],
   methods: {},
   async asyncData({ $content }) {
     const projectList = await $content("projects").fetch();
