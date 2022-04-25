@@ -72,25 +72,31 @@ export default {
 </script>
 <style scoped lang="scss">
 .button {
-  display: block;
+  display: grid;
   position: relative;
   padding: 1rem 2rem;
   background-color: var(--color-orange-yellow);
   max-width: max-content;
   border-radius: 20px;
+  max-height: max-content;
 
   &--text {
+    align-self: center;
+    justify-self: center;
+    grid-area: 1/-1;
     font-weight: bold;
     color: var(--color-rich-black);
   }
 
   svg {
     display: none;
+    grid-area: 1/-1;
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: 500px) {
     width: 13rem;
     height: 13rem;
+    background-color: transparent;
 
     svg {
       display: block;
@@ -98,13 +104,9 @@ export default {
     }
 
     &--text {
-      position: absolute;
+
       z-index: 1;
-      width: 100%;
       padding: 0.5rem;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
       text-align: center;
       pointer-events: none;
       transition: opacity ease-out 100ms;

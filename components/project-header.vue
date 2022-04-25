@@ -92,7 +92,8 @@ export default {
       });
       this.renderer.setSize(
         this.width,
-        this.height
+        this.height,
+        false,
       );
       this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       this.container.appendChild(this.renderer.domElement);
@@ -120,14 +121,12 @@ export default {
       // Update sizes
       this.width = this.container.offsetWidth;
       this.height = this.container.offsetHeight;
-
       // Update camera
       this.camera.aspect = this.width / this.height;
-      console.log("resize");
       this.camera.updateProjectionMatrix();
 
       // Update renderer
-      this.renderer.setSize(this.width, this.height);
+      this.renderer.setSize(this.width, this.height, false);
       this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     },
     update() {
@@ -298,8 +297,14 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="scss">
 .project-header {
   height: 60vh;
+  width: 100%;
+  max-width: 100%;
+
+  canvas {
+    width: 100%;
+  }
 }
 </style>

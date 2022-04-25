@@ -61,17 +61,7 @@ import anime from "animejs";
 
 export default {
   mounted() {
-    const userPrefersDark =
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-    if (userPrefersDark) {
-      this.setDarkMode();
-      return;
-    }
-
-    this.setLightMode();
-
+    this.setDarkMode();
   },
   data() {
     return {

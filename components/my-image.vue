@@ -1,5 +1,5 @@
 <template>
-  <canvas ref="three-container" class="image" />
+  <canvas ref="three-container"  class="image" :style="{aspectRatio : `${naturalWidth} / ${naturalHeight}`}" />
 </template>
 <script>
 import {
@@ -16,17 +16,19 @@ import {
 } from "three";
 import imageFrag from '~/assets/shaders/image-fragment.frag'
 import imageVert from '~/assets/shaders/image-vert.vert'
+import { random } from "gsap/gsap-core";
 export default {
   name: "my-image",
-  mounted() {
+  async mounted() {
     this.container = this.$refs["three-container"];
-    this.width = this.container.offsetWidth;
-    this.height = this.container.offsetHeight;
-    this.initThree();
+    await this.initThree();
   },
   data() {
     return {
-      pointer: new Vector2(0, 0)
+      pointer: new Vector2(0, 0),
+      ratio : 0,
+      naturalWidth : 100,
+       naturalHeight : 100,
     };
   },
   props: {
@@ -41,7 +43,9 @@ export default {
       this.scene = new Scene();
       this.clock = new Clock();
 
-      this.camera = new PerspectiveCamera(60, this.width / this.height, 0.1, 1000);
+      console.log("aaza", this.width, this.height, this.container.clientWidth);
+
+      this.camera = new PerspectiveCamera(60, this.height / this.width , 0.1, 1000);
 
       this.scene.add(this.camera);
 
@@ -49,12 +53,13 @@ export default {
         antialias: true,
         canvas: this.$refs["three-container"]
       });
+
+      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       this.renderer.setSize(
         this.width,
-        this.height
+        this.height,
+        false
       );
-      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
 
       // const {OrbitControls} = await import("three/examples/jsm/controls/OrbitControls.js")
       // this.controls = new OrbitControls(this.camera, this.renderer.domElement)
@@ -75,16 +80,19 @@ export default {
       return new Promise((resolve => {
         this.textureLoader.load(this.imageUrl, (texture) => {
           this.texture = texture
+          const image = this.texture.image
+          this.naturalHeight = image.naturalHeight
+          this.naturalWidth = image.naturalWidth
+          this.ratio =  this.naturalHeight /this.naturalWidth;
           this.updateDimensions()
           resolve();
         });
       }));
     },
     updateDimensions() {
-      this.width = this.container.offsetWidth;
-      this.ratio = this.texture.image.naturalHeight / this.texture.image.naturalWidth;
-      this.height = this.ratio * this.width
-   //   console.log(this.width, this.height);
+      console.log("lknflkdf", this.container.clientWidth);
+      this.width = this.container.clientWidth;
+      this.height = this.container.clientWidth * this.ratio;
     },
     onPointerMove(e) {
       if (this.isPhone) return;
@@ -98,15 +106,19 @@ export default {
       //this.updateRaycaster();
     },
     onResize() {
-      // Update sizes
       this.updateDimensions()
-
-      // Update camera
-      this.camera.aspect = this.width / this.height;
+        // Update camera
+      this.camera.aspect =  this.height /this.width;
       this.camera.updateProjectionMatrix();
 
+      this.renderer.setSize(
+        this.width,
+        this.height,
+        false
+      )
+
       // Update renderer
-      this.renderer.setSize(this.width, this.height);
+     // this.renderer.setSize(this.width, this.height);
       this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     },
     update() {
@@ -117,7 +129,7 @@ export default {
     },
     addImage() {
       this.plane = new Mesh(
-        new PlaneGeometry(11, this.ratio *11),
+        new PlaneGeometry(this.ratio *11, 11),
         new ShaderMaterial({
           extensions: {
             derivatives: "#extension GL_OES_standard_derivatives : enable"
@@ -144,6 +156,5 @@ export default {
 <style scoped>
 .image {
   width: 100%;
-  height: 30rem;
 }
 </style>

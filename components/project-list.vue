@@ -110,7 +110,7 @@ export default {
 }
 
 .project--link {
-
+  align-self: center;
   @include can-hover {
     &:hover {
       animation-play-state: paused !important;

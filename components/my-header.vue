@@ -2,9 +2,8 @@
   <header class="header u--d-flex u--justify-between">
     <nuxt-link to="/"><Logo/></nuxt-link>
     <div class="header__links">
-      <header-link to="/projects">Work</header-link>
+      <header-link to="/#work">Work</header-link>
       <header-link to="#">About</header-link>
-      <SwitchTheme />
     </div>
   </header>
 </template>
@@ -18,14 +17,14 @@ export default {
   position: sticky;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   z-index: 100;
   transition: opacity ease-out 200ms;
   padding: 1rem 2rem;
 }
 .header__links {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 2rem;
   align-items: center;
 }
