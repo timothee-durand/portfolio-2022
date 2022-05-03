@@ -158,13 +158,6 @@ export default {
       this.camera.lookAt(this.scene.position)
 
       if (this.controls) this.controls.update()
-      if (this.titleObject) {
-        if (this.$store.state.themeMode === DARK_MODE) {
-          this.titleObject.material.color = new Color('#E1EFE6')
-        } else {
-          this.titleObject.material.color = new Color('#000411')
-        }
-      }
 
       this.renderer.render(this.scene, this.camera)
 
@@ -240,12 +233,13 @@ export default {
       const { TextGeometry } = await import(
         'three/examples/jsm/geometries/TextGeometry.js'
       )
+      console.log({text});
       this.textGeometryParameters.font = await this.loadFacetype()
       const textGeometry = new TextGeometry(text, this.textGeometryParameters)
       //center pivot point
       textGeometry.center()
       const textMaterial = new MeshToonMaterial({
-        color: 'white',
+        color: '#E1EFE6',
         reflectivity: 0,
       })
       const mesh = new Mesh(textGeometry, textMaterial)
@@ -300,7 +294,7 @@ export default {
         )
         const fontLoader = new FontLoader()
         fontLoader.load(
-          '/facetypes/commune_nuit_debout.typeface.json.json',
+          '/facetypes/commune_nuit_debout.typeface.json',
           (font) => {
             resolve(font)
           }
