@@ -1,0 +1,28 @@
+.u--d-flex {
+  display: flex;
+  align-items: center;
+}
+
+.u--justify-between {
+  justify-content: space-between;
+}
+
+.u--justify-center {
+  justify-content: center;
+}
+
+.u--align-center {
+  text-align: center;
+}
+
+.u--visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap; /* added line */
+  border: 0;
+}

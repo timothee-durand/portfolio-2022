@@ -1,0 +1,30 @@
+@import '../mixins/text';
+.text--big-title {
+  @include text-style-big-title;
+}
+
+.text--medium-title {
+  @include text-style-medium-title;
+}
+
+.text--small-title {
+  @include text-style-small-title;
+}
+
+.text--bold {
+  @include text-style-bold;
+}
+
+.text--small {
+  @include text-style-small;
+}
+
+.text--link,
+.text--link--blank {
+  @include text-style-small-title;
+  transition: color ease-out 200ms;
+
+  &:hover {
+    color: var(--color-orange-yellow);
+  }
+}

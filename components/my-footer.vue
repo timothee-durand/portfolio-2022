@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <p>Copyright moi</p>
+    <!--    <my-text>Copyright moi</my-text>-->
   </footer>
 </template>
 

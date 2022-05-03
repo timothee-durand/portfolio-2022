@@ -1,2 +1,18 @@
-@import 'fonts';
-@import 'general';
+//MIXINS
+@import 'mixins/breakpoints';
+@import 'mixins/text';
+
+// TOKENS
+@import 'tokens/colors';
+@import 'tokens/text-class';
+@import 'tokens/fonts';
+
+//RESET
+@import 'general/reset';
+
+//UTILS
+@import 'general/utils';
+
+//GENERAL STYLE
+@import 'general/general';
+@import 'general/page-transition';
