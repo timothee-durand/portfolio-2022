@@ -1,9 +1,12 @@
+import Styles from '~/assets/style/tokens/colors.scss'
+
 export const LIGHT_MODE = 'light'
 export const DARK_MODE = 'dark'
 
 export const state = () => ({
   themeMode: LIGHT_MODE,
   transitionComponent: null,
+  styles: { ...Styles },
 })
 
 export const getters = () => ({

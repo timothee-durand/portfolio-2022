@@ -19,8 +19,7 @@ export default {
   data() {
     return {
       forms: [this.cross, this.circle, this.cross2, this.flash, this.angle],
-      baseColorName: '--color-orange-yellow',
-      baseColor: { h: 0, s: 0, l: 0 },
+      baseColor: { h: 44, s: 81, l: 67 },
       colors: [],
       colorNumber: 10,
       strokeWidth: 3,
@@ -54,7 +53,6 @@ export default {
       this.updateDimensions()
       // this.getBoundingValues();
       // this.setViewBox();
-      this.setColorFromCss()
       this.generateColorPallet()
       this.addForms()
     },
@@ -136,19 +134,6 @@ export default {
     },
     getHslString({ h, s, l }) {
       return `hsl(${h.toFixed()}, ${s.toFixed()}%, ${l.toFixed()}%)`
-    },
-    setColorFromCss() {
-      const baseColorValue = getComputedStyle(
-        document.documentElement
-      ).getPropertyValue(this.baseColorName)
-      const result = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(
-        baseColorValue
-      )
-      this.baseColor = {
-        h: parseInt(result[1]),
-        s: parseInt(result[2]),
-        l: parseInt(result[3]),
-      }
     },
     cross(width, height, strokeColor) {
       //console.log("soeo", strokeColor);
