@@ -60,13 +60,9 @@
 }
 </style>
 <script>
-import { mapMutations } from 'vuex'
 import anime from 'animejs'
 
 export default {
-  mounted() {
-    this.setDarkMode()
-  },
   data() {
     return {
       transitionElement: null,
@@ -76,10 +72,6 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({
-      setDarkMode: 'setDarkMode',
-      setLightMode: 'setLightMode',
-    }),
 
     leave(el, done) {
       try {

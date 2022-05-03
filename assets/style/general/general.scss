@@ -1,14 +1,14 @@
 @import '../mixins/text';
 @import '../tokens/colors';
 
-body[data-theme='dark'] {
-  @include color-theme-dark;
-}
-
-body,
-body[data-theme='light'] {
-  @include color-theme-light;
-}
+//body[data-theme='dark'] {
+//  @include color-theme-dark;
+//}
+//
+//body,
+//body[data-theme='light'] {
+//  @include color-theme-light;
+//}
 
 body {
   font-family: Poppins, sans-serif;
@@ -16,6 +16,7 @@ body {
   color: var(--color-text);
   @include text-style-text;
   width: 100%;
+  @include color-theme-dark;
 }
 
 .__nuxt,
