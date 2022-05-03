@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "cross-env NUXT_HOST=0.0.0.0 NUXT_PORT=3000 nuxt",
+    "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -26,6 +26,7 @@
     "glslify-loader": "^2.0.0",
     "gsap": "^3.9.1",
     "nuxt": "^2.15.8",
+    "nuxt-social-meta": "^1.0.0",
     "parallax-js": "^3.1.0",
     "plop": "^3.0.5",
     "raw-loader": "^4.0.2",

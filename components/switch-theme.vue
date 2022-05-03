@@ -7,14 +7,14 @@
 <script>
 import MoonSvg from '~/assets/images/moon.svg?inline'
 import SunSvg from '~/assets/images/sun.svg?inline'
-import { mapMutations } from "vuex";
+import { mapMutations } from 'vuex'
 export default {
   name: 'SwitchTheme',
   components: { MoonSvg, SunSvg },
   methods: {
     ...mapMutations({
-      toggleMode : "toggleMode"
-    })
+      toggleMode: 'toggleMode',
+    }),
   },
 }
 </script>
@@ -35,11 +35,11 @@ export default {
   }
 }
 
-body[data-theme="dark"] .switch-theme__moon {
+body[data-theme='dark'] .switch-theme__moon {
   display: none;
 }
 
-body[data-theme="light"] .switch-theme__sun {
+body[data-theme='light'] .switch-theme__sun {
   display: none;
 }
 </style>

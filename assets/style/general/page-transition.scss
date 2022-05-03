@@ -3,14 +3,11 @@
   & .is-transition-link svg {
     transition: transform ease-out 2000ms;
   }
-
 }
 .test-enter,
 .test-leave-active {
-
-  & .is-transition-link svg{
+  & .is-transition-link svg {
     transition: transform ease-out 2000ms;
     transform: scale(100) !important;
   }
-
 }

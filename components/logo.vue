@@ -1,7 +1,6 @@
 <template>
   <div class="logo">
     <DarkThemeLogo class="logo__dark" />
-    <LightThemeLogo class="logo__light" />
   </div>
 </template>
 <script>
@@ -14,13 +13,12 @@ export default {
     DarkThemeLogo,
     LightThemeLogo,
   },
-  methods: {
-  }
+  methods: {},
 }
 </script>
 <style lang="scss">
-body[data-theme="light"] .logo__dark,
-body[data-theme="dark"] .logo__light {
+body[data-theme='light'] .logo__dark,
+body[data-theme='dark'] .logo__light {
   display: none;
 }
 </style>

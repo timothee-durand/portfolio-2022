@@ -1,4 +1,5 @@
 import gsap from 'gsap'
+import siteName from './config'
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -6,14 +7,19 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'portfolio-2022',
+    title: 'Timothée DURAND | Web-developer',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          "I'm a french web developer based in Paris - Currently in school at Hetic and working at Ubisoft",
+      },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -38,6 +44,21 @@ export default {
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
     '@nuxtjs/svg',
+    [
+      'nuxt-social-meta',
+      {
+        url: 'timotheedurand.fr',
+        title: 'Timothée DURAND | Web-developer',
+        site_name: 'Timothée DURAND | Web-developer',
+        description:
+          "I'm a french web developer based in Paris - Currently in school at Hetic and working at Ubisoft",
+        img: 'home-screen.png',
+        img_size: { width: 1920, height: 1080 },
+        locale: 'en_US',
+        twitter_card: 'summary_large_image',
+        theme_color: '#efcb68',
+      },
+    ],
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -54,11 +75,6 @@ export default {
   build: {
     transpile: ['@svgdotjs/svg.js', 'gsap'],
     extend(config, { isClient }) {
-      // Extend only webpack config for client-bundle
-      // if (isClient) {
-      //   config.devtool = 'source-map'
-      // }
-      // console.log(config.module.rules);
       config.module.rules.push({
         test: /\.(glsl|vs|fs|vert|frag)$/,
         exclude: /node_modules/,

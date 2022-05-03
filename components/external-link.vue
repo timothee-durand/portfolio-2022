@@ -1,47 +1,52 @@
 <template>
-  <a :href="href" :target="target" :class="{'external-link' : true, 'external-link_social' : isSocial}">
-    <my-text tag="span" :type="type" class="external-link--text"><slot/></my-text>
-    <ExternalIcon v-if="!isSocial"/>
+  <a
+    :href="href"
+    :target="target"
+    :class="{ 'external-link': true, 'external-link_social': isSocial }"
+  >
+    <my-text tag="span" :type="type" class="external-link--text"
+      ><slot
+    /></my-text>
+    <ExternalIcon v-if="!isSocial" />
   </a>
 </template>
 
 <script>
 import ExternalIcon from '~/assets/images/external.svg?inline'
 export default {
-  name: "external-link",
-  components : {ExternalIcon },
+  name: 'external-link',
+  components: { ExternalIcon },
   props: {
     href: {
       type: String,
-      required : true,
+      required: true,
     },
     isSocial: {
-      type : Boolean,
-      default : false,
-    },
-    type:{
-      type : String,
-      default : ""
-    },
-    noTarget : {
       type: Boolean,
-      default : false,
-    }
+      default: false,
+    },
+    type: {
+      type: String,
+      default: '',
+    },
+    noTarget: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     target() {
-      return this.noTarget ? "" : "_blank";
-    }
-  }
-
-};
+      return this.noTarget ? '' : '_blank'
+    },
+  },
+}
 </script>
 
 <style lang="scss">
 .external-link {
   display: inline-flex;
   align-items: center;
-  gap:0.5rem;
+  gap: 0.5rem;
   font-weight: 700;
   transition: color ease-out 200ms;
 
@@ -50,7 +55,7 @@ export default {
     display: inline;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       bottom: 5%;
       left: 0;
@@ -72,13 +77,11 @@ export default {
     text-transform: uppercase;
   }
 
-
-
   &:hover {
     color: var(--color-orange-yellow);
 
     svg path {
-      fill : var(--color-orange-yellow)
+      fill: var(--color-orange-yellow);
     }
 
     .external-link--text {

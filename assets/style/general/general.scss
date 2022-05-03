@@ -1,14 +1,14 @@
 @import '../mixins/text';
 @import '../tokens/colors';
 
-body[data-theme="dark"] {
+body[data-theme='dark'] {
   @include color-theme-dark;
 }
 
-body, body[data-theme="light"] {
+body,
+body[data-theme='light'] {
   @include color-theme-light;
 }
-
 
 body {
   font-family: Poppins, sans-serif;
@@ -18,7 +18,8 @@ body {
   width: 100%;
 }
 
-.__nuxt, .__layout {
+.__nuxt,
+.__layout {
   width: 100%;
 }
 
@@ -42,9 +43,8 @@ main {
 }
 
 a {
-  color : var(--color-text)
+  color: var(--color-text);
 }
-
 
 .svg-background {
   width: 100%;
@@ -53,7 +53,7 @@ a {
 
 ::selection {
   background: var(--color-orange-yellow);
-  color : var(--color-rich-black)
+  color: var(--color-rich-black);
 }
 
 .content-container {

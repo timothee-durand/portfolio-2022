@@ -6759,6 +6759,11 @@ num2fraction@^1.2.2:
   resolved "https://registry.npmjs.org/num2fraction/-/num2fraction-1.2.2.tgz"
   integrity sha1-b2gragJ6Tp3fpFZM0lidHU5mnt4=
 
+nuxt-social-meta@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/nuxt-social-meta/-/nuxt-social-meta-1.0.0.tgz#1c2458d33726b1a87c8afc74446a6d0a7ba03583"
+  integrity sha512-IL0jGSqj7eRq7YxkMTHLPBX+mDtmnxOiyhle35xWwQL7CwIau05SysQyjMrQSvEqKL4zQAOM5+DGuPVcthfZ7Q==
+
 nuxt@^2.15.8:
   version "2.15.8"
   resolved "https://registry.npmjs.org/nuxt/-/nuxt-2.15.8.tgz"

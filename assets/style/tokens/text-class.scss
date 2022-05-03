@@ -15,12 +15,12 @@
   @include text-style-bold;
 }
 
-
 .text--small {
   @include text-style-small;
 }
 
-.text--link, .text--link--blank {
+.text--link,
+.text--link--blank {
   @include text-style-small-title;
   transition: color ease-out 200ms;
 

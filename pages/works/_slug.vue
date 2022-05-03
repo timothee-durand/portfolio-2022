@@ -7,11 +7,11 @@
         <div class="project-metas">
           <div class="project-meta">
             <my-text type="small">Type</my-text>
-            <my-text type="small-title">{{ content.type.join(", ") }}</my-text>
+            <my-text type="small-title">{{ content.type.join(', ') }}</my-text>
           </div>
           <div class="project-meta">
             <my-text type="small">Role</my-text>
-            <my-text type="small-title">{{ content.role.join(", ") }}</my-text>
+            <my-text type="small-title">{{ content.role.join(', ') }}</my-text>
           </div>
           <div class="project-meta">
             <my-text type="small">Year</my-text>
@@ -20,32 +20,48 @@
         </div>
       </div>
       <div class="project-presentation--content">
-        <my-text class="project--title u--visually-hidden" tag="h1">{{content.title}}</my-text>
+        <my-text class="project--title u--visually-hidden" tag="h1">{{
+          content.title
+        }}</my-text>
         <my-text type="medium-title" tag="h2">{{ content.subtitle }}</my-text>
         <nuxt-content class="project--article" :document="content" />
       </div>
     </div>
-    <my-image class="single-project--thumbnail" :image-url="content.thumbnail"/>
-    <external-link v-if="content.link" :href="content.link" class="single-project-link">Discover</external-link>
+    <my-image
+      class="single-project--thumbnail"
+      :image-url="content.thumbnail"
+    />
+    <external-link
+      v-if="content.link"
+      :href="content.link"
+      class="single-project-link"
+      >Discover</external-link
+    >
   </article>
 </template>
 <script>
-import ExternalLink from "../../components/external-link.vue";
+import ExternalLink from '../../components/external-link.vue'
+import { siteName, worksDir } from "../../config/index.js";
 export default {
-  name: "SingleProject",
+  name: 'SingleProject',
   components: { ExternalLink },
   async asyncData({ $content, params }) {
-    const content = await $content("/projects/", params.slug).fetch();
+    const content = await $content(worksDir, params.slug).fetch()
 
     return {
-      content
-    };
+      content,
+    }
+  },
+  head()  {
+    return {
+      title: this.content.title + " | " + siteName,
+    }
   }
-};
+}
 </script>
 <style lang="scss">
-@import "~/assets/style/mixins/text";
-@import "~/assets/style/mixins/breakpoints";
+@import '~/assets/style/mixins/text';
+@import '~/assets/style/mixins/breakpoints';
 
 .project-presentation {
   display: grid;
@@ -59,7 +75,6 @@ export default {
   }
 
   .project-presentation--aside {
-
     @include tablet {
       text-align: right;
     }
@@ -79,10 +94,7 @@ export default {
       max-width: 20rem;
       margin: auto;
     }
-
-
   }
-
 
   .project--article {
     h3 {
@@ -108,6 +120,5 @@ export default {
   -webkit-border-radius: 1rem;
   -moz-border-radius: 1rem;
   border-radius: 1rem;
-
 }
 </style>

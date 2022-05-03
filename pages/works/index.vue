@@ -4,20 +4,21 @@
   </div>
 </template>
 <script>
+import { worksDir } from "../../config";
 
 export default {
   data() {
-    return {};
+    return {}
   },
   mixins: [],
   methods: {},
   async asyncData({ $content }) {
-    const projectList = await $content("projects").fetch();
+    const projectList = await $content(worksDir).fetch()
     return {
-      projectList
-    };
-  }
-};
+      projectList,
+    }
+  },
+}
 </script>
 <style scoped>
 /*main {*/
