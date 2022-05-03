@@ -87,6 +87,10 @@ export default {
   object-fit: cover;
   margin-bottom: 2rem;
   border-radius: 1rem;
+
+  @include tablet {
+    margin-bottom: 0;
+  }
 }
 
 .project--title {

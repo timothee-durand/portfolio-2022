@@ -129,7 +129,7 @@ export default {
     },
     addImage() {
       this.plane = new Mesh(
-        new PlaneGeometry(this.ratio *11, 11),
+        new PlaneGeometry(this.ratio *5, 5),
         new ShaderMaterial({
           extensions: {
             derivatives: "#extension GL_OES_standard_derivatives : enable"
@@ -137,9 +137,9 @@ export default {
           side: DoubleSide,
           uniforms: {
             "tDiffuse": { value: this.texture },
-            "resolution": { value: new Vector2(1.,window.innerHeight/window.innerWidth) },
+            "resolution": { value: new Vector2(1.,this.height/this.width) },
             "uMouse": { value:  this.pointer},
-            "uVelo": { value: -10 },
+            "uVelo": { value: -5 },
           },
           // wireframe: true,
           transparent: true,

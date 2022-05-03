@@ -26,12 +26,14 @@
       </div>
     </div>
     <my-image class="single-project--thumbnail" :image-url="content.thumbnail"/>
-    <my-text v-if="content.link" tag="a" :href="content.link" type="link--blank" class="single-project-link">Discover</my-text>
+    <external-link v-if="content.link" :href="content.link" class="single-project-link">Discover</external-link>
   </article>
 </template>
 <script>
+import ExternalLink from "../../components/external-link.vue";
 export default {
   name: "SingleProject",
+  components: { ExternalLink },
   async asyncData({ $content, params }) {
     const content = await $content("/projects/", params.slug).fetch();
 
@@ -95,10 +97,11 @@ export default {
   }
 }
 
-.single-project-link {
-  text-align: center;
-  margin-top: 2rem;
+.single-project-link.external-link {
+  display: flex;
   justify-content: center;
+  margin-top: 2rem;
+  @include text-style-small-title;
 }
 
 .single-project--thumbnail {

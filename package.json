@@ -26,6 +26,7 @@
     "glslify-loader": "^2.0.0",
     "gsap": "^3.9.1",
     "nuxt": "^2.15.8",
+    "parallax-js": "^3.1.0",
     "plop": "^3.0.5",
     "raw-loader": "^4.0.2",
     "simplex-noise": "^3.0.1",
@@ -39,6 +40,7 @@
   "devDependencies": {
     "@nuxt/types": "^2.15.8",
     "@nuxt/typescript-build": "^2.1.0",
+    "@nuxtjs/style-resources": "^1.2.1",
     "eslint-config-prettier": "^8.3.0",
     "opn": "^6.0.0",
     "prettier": "^2.5.1",

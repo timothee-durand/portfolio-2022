@@ -76,6 +76,7 @@ export default {
       setDarkMode: "setDarkMode",
       setLightMode: "setLightMode"
     }),
+
     leave(el, done) {
       try {
         const lastLinkClicked = this.$store.state.transitionComponent && this.$store.state.transitionComponent.closest("a");

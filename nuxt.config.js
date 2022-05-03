@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import gsap from 'gsap'
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -11,7 +11,7 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-       { name: 'format-detection', content: 'telephone=no' },
+      { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
@@ -20,9 +20,7 @@ export default {
   css: ['~/assets/style/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-  ],
-
+  plugins: [],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -52,7 +50,6 @@ export default {
   // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {},
 
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['@svgdotjs/svg.js', 'gsap'],
@@ -61,15 +58,12 @@ export default {
       // if (isClient) {
       //   config.devtool = 'source-map'
       // }
-     // console.log(config.module.rules);
-      config.module.rules.push( {
+      // console.log(config.module.rules);
+      config.module.rules.push({
         test: /\.(glsl|vs|fs|vert|frag)$/,
         exclude: /node_modules/,
-        use: [
-          'raw-loader',
-          'glslify-loader'
-        ]
+        use: ['raw-loader', 'glslify-loader'],
       })
-    }
+    },
   },
 }

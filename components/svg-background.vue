@@ -5,6 +5,7 @@
 <script>
 import { random } from "~/js/utils/generative-utils.js";
 import { SVG } from "@svgdotjs/svg.js";
+import anime from "animejs";
 
 export default {
   name: "svg-background",
@@ -12,7 +13,8 @@ export default {
     formProba: {
       type: Number,
       default: 7
-    }
+    },
+    parallaxSpeed : {  type :Number, default:   50 },
   },
   data() {
     return {
@@ -29,7 +31,8 @@ export default {
       generatedForms: [],
       svg: null,
       rowNumber: 10,
-      rowHeight: 0
+      rowHeight: 0,
+      pointer : {x : 0, y : 0},
     };
   },
   mounted() {
@@ -43,6 +46,8 @@ export default {
       this.clear();
       this.initForms();
     });
+
+    window.addEventListener("mousemove", (e) => this.onMouseMove(e))
   },
   methods: {
     initForms() {
@@ -55,6 +60,29 @@ export default {
     },
     clear() {
       this.svg.node.innerHTML = "";
+    },
+    onMouseMove({ clientX, clientY }) {
+      this.pointer.x = -(clientX/ window.innerWidth) * 2 - 1;
+      this.pointer.y = -(clientY / window.innerHeight) * 2 + 1;
+
+
+        this.generatedForms.forEach((f)=> {
+          // f.animate({
+          //   duration : 300,
+          //   when : 'now',
+          // }).transform({
+          //   translateX : this.pointer.x * this.parallaxSpeed * f.depth,
+          //   translateY : this.pointer.y * this.parallaxSpeed * f.depth,
+          //   rotate : f.rotation
+          // })
+           anime({
+            targets : f.node,
+            translateX : this.pointer.x * this.parallaxSpeed * f.depth,
+            translateY : this.pointer.y * this.parallaxSpeed * f.depth,
+            easing: "easeOutExpo",
+            duration : 500,
+          })
+        })
     },
     updateDimensions() {
       this.width = this.$refs.container.offsetWidth;
@@ -76,6 +104,8 @@ export default {
           form.transform({
             rotate: form.rotation
           });
+          form.depth = random(0.2, 0.8)
+          this.generatedForms.push(form)
         }
       }
     },

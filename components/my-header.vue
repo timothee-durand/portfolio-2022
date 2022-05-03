@@ -3,7 +3,8 @@
     <nuxt-link to="/"><Logo/></nuxt-link>
     <div class="header__links">
       <header-link to="/#work">Work</header-link>
-      <header-link to="#">About</header-link>
+      <header-link to="/about">About</header-link>
+      <external-link is-social href="mailto:contact@timotheedurand.fr" no-target>Get in touch</external-link>
     </div>
   </header>
 </template>
@@ -23,10 +24,14 @@ export default {
   padding: 1rem 2rem;
 }
 .header__links {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 2rem;
+  display: flex;
+  gap: 2rem;
   align-items: center;
+
+  a {
+    text-transform: none;
+    font-weight: 400;
+  }
 }
 
 .is-content-transition {
