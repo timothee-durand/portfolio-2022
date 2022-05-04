@@ -50,6 +50,7 @@ export default {
   },
   methods: {
     initForms() {
+      if(!this.$refs.container) return
       this.updateDimensions()
       // this.getBoundingValues();
       // this.setViewBox();
@@ -82,6 +83,7 @@ export default {
       })
     },
     updateDimensions() {
+
       this.width = this.$refs.container.offsetWidth
       this.height = this.$refs.container.offsetHeight
       this.rowHeight = this.height / this.rowNumber

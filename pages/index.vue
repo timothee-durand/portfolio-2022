@@ -37,4 +37,8 @@ export default {
   min-height: 70vh;
   width: 100%;
 }
+
+.hero-title {
+  grid-row: 2/3 ;
+}
 </style>

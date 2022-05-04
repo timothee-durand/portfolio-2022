@@ -1,7 +1,7 @@
 ---
 title: Astéroides
 subtitle: "Personal Test | Clue : it's about asteroids"
-thumbnail: '/project-images/asteroides.png'
+thumbnail: '/project-images/asteroides.jpg'
 role:
   - Web developer
 year: 2020

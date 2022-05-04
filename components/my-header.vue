@@ -2,7 +2,7 @@
   <header class="header u--d-flex u--justify-between">
     <nuxt-link to="/"><Logo /></nuxt-link>
     <div class="header__links">
-      <header-link to="/works">Work</header-link>
+      <header-link to="/works">Works</header-link>
       <header-link to="/about">About</header-link>
       <external-link is-social href="mailto:contact@timotheedurand.fr" no-target
         >Get in touch</external-link
