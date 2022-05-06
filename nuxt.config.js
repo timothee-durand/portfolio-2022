@@ -10,7 +10,10 @@ export default {
     title: 'Timothée DURAND | Web-developer',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1, user-scalable=no',
+      },
       {
         hid: 'description',
         name: 'description',
@@ -19,7 +22,7 @@ export default {
       },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -64,8 +67,17 @@ export default {
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
+    meta: {
+      name: 'Timothée DURAND | Portfolio',
+      theme_color: '#efcb68',
+    },
     manifest: {
+      name: 'Timothée DURAND | Portfolio',
       lang: 'en',
+      useWebmanifestExtension: false,
+    },
+    icon: {
+      fileName: 'logo.png',
     },
   },
 

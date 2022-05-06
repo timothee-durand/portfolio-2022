@@ -89,7 +89,7 @@ export default {
         let factor
 
         if (!this.isDefaultTransition) {
-          factor = (window.innerWidth / width) * 3
+          factor = (Math.sqrt(Math.pow(window.innerWidth, 2) + Math.pow(window.innerHeight, 2)) / width) * 3
 
           if (
             lastLinkClicked &&
@@ -103,7 +103,7 @@ export default {
         } else {
           this.keepTransitionElement = true
           this.transitionElement = svg
-          factor = 2
+          factor = 3
         }
 
         anime({
@@ -133,7 +133,7 @@ export default {
 
           anime({
             targets: this.transitionElement,
-            scale: [20, 0],
+            scale: [30, 0],
             zi: 2000,
             duration: 1000,
             easing: 'easeInQuad',

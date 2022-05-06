@@ -176,12 +176,6 @@ export default {
     },
     async loadTextures() {
       const textures = {}
-      //roughnessMap
-      // textures.roughness = await this.loadTexture(wallDirName, "wall-roughness.jpg");
-      // textures.roughness.wrapS = RepeatWrapping;
-      // textures.roughness.wrapT = RepeatWrapping;
-      // textures.roughness.repeat.set(4, 4);
-
       //particles sprites
       textures.eclair1 = await this.loadTexture(
         particlesSpritesDirName,
@@ -203,29 +197,11 @@ export default {
       this.textures = textures
     },
     addLights() {
-      // this.ambiantLight = new AmbientLight("#b46930", 1);
-      // this.ambiantLight.position.set()
-      // this.scene.add(this.ambiantLight);
       this.spotLight = new SpotLight('white', 2, 20, Math.PI / 3)
       this.spotLight.position.set(0, 10, 10)
       this.scene.add(this.spotLight)
     },
     async addModels() {
-      // const plane = new Mesh(
-      //   new PlaneGeometry(20, 20, 100, 100),
-      //   new MeshPhysicalMaterial({
-      //     // normalMap : textures.normal,
-      //     //heightMap : textures.height,
-      //     roughness : 1,
-      //     roughnessMap : this.textures.roughness,
-      //     // aoMap: textures.ao,
-      //     thickness : 0.5,
-      //     color: "white",
-      //     transmission: 1
-      //   })
-      // );
-      // plane.position.z = -1;
-      // this.scene.add(plane);
       this.titleObject = await this.createTextGeometry(this.projectTitle)
       this.scene.add(this.titleObject)
     },
@@ -233,7 +209,6 @@ export default {
       const { TextGeometry } = await import(
         'three/examples/jsm/geometries/TextGeometry.js'
       )
-      console.log({text});
       this.textGeometryParameters.font = await this.loadFacetype()
       const textGeometry = new TextGeometry(text, this.textGeometryParameters)
       //center pivot point

@@ -94,6 +94,18 @@ export default {
       margin-block-end: 1rem;
       max-width: 20rem;
       margin: auto;
+
+      p {
+        margin: 0;
+
+        &:first-child {
+          margin-bottom: 0.5rem;
+        }
+
+        &:last-child {
+          margin-bottom: 1rem;
+        }
+      }
     }
   }
 

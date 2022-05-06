@@ -1,9 +1,9 @@
 ---
 title: Les lignes du temps
 subtitle: Collective Project | History Search Engine
-thumbnail: /project-images/ldt.png
+thumbnail: /project-images/ldt.jpg
 role:
-  - Web developper
+  - Web developer
 year: 2020
 type:
   - School Project
