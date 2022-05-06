@@ -43,6 +43,7 @@ export default {
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+    'nuxt-clipboard',
     '@nuxtjs/svg',
     [
       'nuxt-social-meta',
@@ -81,5 +82,9 @@ export default {
         use: ['raw-loader', 'glslify-loader'],
       })
     },
+  },
+
+  router: {
+    middleware: 'route-guard',
   },
 }

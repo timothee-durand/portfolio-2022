@@ -53,6 +53,7 @@
 import ExternalLink from '../components/external-link.vue'
 import { siteName } from "../config/index.js";
 export default {
+  scrollToTop: true,
   components: { ExternalLink },
   head: {
     title: "About | " + siteName,

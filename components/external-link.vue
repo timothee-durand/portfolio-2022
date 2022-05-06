@@ -1,6 +1,6 @@
 <template>
   <a
-    :href="href"
+    :href="href === '' ? false : href"
     :target="target"
     :class="{ 'external-link': true, 'external-link_social': isSocial }"
   >
@@ -19,7 +19,7 @@ export default {
   props: {
     href: {
       type: String,
-      required: true,
+      default : ""
     },
     isSocial: {
       type: Boolean,
@@ -49,6 +49,7 @@ export default {
   gap: 0.5rem;
   font-weight: 700;
   transition: color ease-out 200ms;
+  cursor: pointer;
 
   &--text {
     position: relative;

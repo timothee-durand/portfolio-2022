@@ -10,6 +10,7 @@ export default {
   data() {
     return {}
   },
+  scrollToTop: true,
   mixins: [],
   methods: {},
   async asyncData({ $content }) {
