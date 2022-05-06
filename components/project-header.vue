@@ -176,6 +176,7 @@ export default {
     },
     async loadTextures() {
       const textures = {}
+
       //particles sprites
       textures.eclair1 = await this.loadTexture(
         particlesSpritesDirName,
@@ -209,6 +210,7 @@ export default {
       const { TextGeometry } = await import(
         'three/examples/jsm/geometries/TextGeometry.js'
       )
+
       this.textGeometryParameters.font = await this.loadFacetype()
       const textGeometry = new TextGeometry(text, this.textGeometryParameters)
       //center pivot point
@@ -281,8 +283,8 @@ export default {
 </script>
 <style lang="scss">
 .project-header {
-  height: 60vh;
   width: 100%;
+  aspect-ratio: 16/9;
   max-width: 100%;
 
   canvas {
