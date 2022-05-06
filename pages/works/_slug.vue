@@ -52,6 +52,7 @@ export default {
       content,
     }
   },
+  scrollToTop: true,
   head()  {
     return {
       title: this.content.title + " | " + siteName,

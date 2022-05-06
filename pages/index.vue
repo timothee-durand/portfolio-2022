@@ -22,6 +22,7 @@
 import { worksDir } from "../config";
 
 export default {
+  scrollToTop: true,
   async asyncData({ $content }) {
     const projectList = await $content(worksDir).fetch()
     return {

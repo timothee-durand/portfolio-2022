@@ -26,6 +26,7 @@
     "glslify-loader": "^2.0.0",
     "gsap": "^3.9.1",
     "nuxt": "^2.15.8",
+    "nuxt-clipboard": "^0.0.7",
     "nuxt-social-meta": "^1.0.0",
     "parallax-js": "^3.1.0",
     "plop": "^3.0.5",
