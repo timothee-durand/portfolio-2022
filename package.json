@@ -21,7 +21,7 @@
     "@svgdotjs/svg.js": "^3.1.2",
     "@timohausmann/quadtree-js": "^1.2.5",
     "animejs": "^3.2.1",
-    "core-js": "^3.19.3",
+    "core-js": "^3.22.4",
     "cross-env": "^7.0.3",
     "glslify-loader": "^2.0.0",
     "gsap": "^3.9.1",
