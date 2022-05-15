@@ -132,7 +132,7 @@ export default {
     },
     addImage() {
       this.plane = new Mesh(
-        new PlaneGeometry(this.ratio * 5, 5),
+        new PlaneGeometry(this.ratio * 6, 6),
         new ShaderMaterial({
           extensions: {
             derivatives: '#extension GL_OES_standard_derivatives : enable',
