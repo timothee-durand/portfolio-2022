@@ -55,8 +55,15 @@ import { siteName } from "../config/index.js";
 export default {
   scrollToTop: true,
   components: { ExternalLink },
-  head: {
-    title: "About | " + siteName,
+  data() {
+    return {
+      title: "About | " + siteName,
+    };
+  },
+  head() {
+    return {
+      title: this.title
+    }
   }
 }
 </script>

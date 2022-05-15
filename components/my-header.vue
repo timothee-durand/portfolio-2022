@@ -28,14 +28,14 @@ export default {
   name: "MyHeader",
   data() {
     return {
-      msg: "Copied!"
+      msg: "Email copied!"
     };
   },
   methods: {
     async copyContact() {
       try {
         await this.$copyText(contactMail);
-        this.msg = "Copied!";
+        this.msg = "Email copied!";
       } catch (e) {
         this.msg = "Error :" + e.message;
       } finally {
@@ -102,6 +102,7 @@ export default {
     justify-content: center;
     left: 0;
     top: 0;
+    text-align: center;
     transform: scale(0);
     background-color: var(--color-orange-yellow);
     color: var(--color-rich-black);

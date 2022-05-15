@@ -6,7 +6,7 @@
     :class="`animated-heading ${isInit ? 'is-init' : ''}`"
   >
     <span v-for="(span,i) in textSpans" :key="'span-' + i" class="word-container">
-        <span v-html="span" :style="`--a-delay:${i};`"/>
+      <span :style="`--a-delay:${i};`">{{span}}</span>
     </span>
   </my-text>
 </template>
