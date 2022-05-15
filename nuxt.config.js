@@ -38,6 +38,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    'nuxt-font-loader',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -98,5 +99,9 @@ export default {
 
   router: {
     middleware: 'route-guard',
+  },
+
+  fontLoader: {
+    url: '/fonts/fonts.css',
   },
 }

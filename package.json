@@ -44,6 +44,7 @@
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/style-resources": "^1.2.1",
     "eslint-config-prettier": "^8.3.0",
+    "nuxt-font-loader": "^1.1.4",
     "opn": "^6.0.0",
     "prettier": "^2.5.1",
     "sass": "^1.49.0",

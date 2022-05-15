@@ -4,10 +4,11 @@
       <client-only>
         <svg-background :form-proba="5" />
       </client-only>
-      <my-text tag="h1" type="big-title" class="hero-title">
-        Timothée Durand <br />
-        French Web Developper
-      </my-text>
+      <animated-text
+        tag="h1"
+        type="big-title"
+        class="hero-title"
+        text="Timothée Durand <br/> French Web Developer"/>
       <client-only>
         <svg-background :form-proba="5" />
       </client-only>
@@ -20,6 +21,7 @@
 
 <script>
 import { worksDir } from "../config";
+
 
 export default {
   scrollToTop: true,
@@ -34,12 +36,13 @@ export default {
 <style lang="scss">
 .hero {
   display: grid;
-  grid-template-rows: 1fr min-content 1fr;
+  grid-template-rows: 20vh min-content 20vh;
   min-height: 70vh;
   width: 100%;
 }
 
 .hero-title {
   grid-row: 2/3 ;
+  line-height: 1.2;
 }
 </style>
