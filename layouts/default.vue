@@ -35,30 +35,7 @@
     <my-footer />
   </div>
 </template>
-<style lang="scss">
-.transition-svg {
-  position: fixed;
-  top: 50vh;
-  left: 50vw;
-}
 
-.default-transition-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  pointer-events: none;
-
-  svg {
-    transform: scale(0);
-  }
-}
-</style>
 <script>
 import anime from 'animejs'
 
@@ -172,3 +149,27 @@ export default {
   },
 }
 </script>
+<style lang="scss">
+.transition-svg {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+}
+
+.default-transition-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  pointer-events: none;
+
+  svg {
+    transform: scale(0);
+  }
+}
+</style>

@@ -2,16 +2,14 @@
   <div class="projects-list">
     <div
       class="project"
-      v-for="(project, i) in projectList"
+      v-for="(project, j) in projectList"
+      :key="'project' + j"
       @mouseenter="onProjectMouseEnter"
       @mouseleave="onProjectMouseLeave"
     >
       <my-image :image-url="project.thumbnail" class="project--thumbnail" />
-      <!--      <img :src="project.thumbnail" :alt="`Project ${project.title}'s thumbnail`" class="project&#45;&#45;thumbnail" />-->
       <div class="project--text">
-        <my-text class="project--title" type="medium-title" tag="h3">{{
-          project.title
-        }}</my-text>
+        <my-text class="project--title" type="medium-title" tag="h3">{{project.title}}</my-text>
         <div class="project--techs">
           <my-text
             class="project--techs--item"
@@ -23,7 +21,6 @@
       </div>
       <my-button
         :to="project.path"
-        :key="project.title + i"
         class="project--link"
         text="About it"
       />

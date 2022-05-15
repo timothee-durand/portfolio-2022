@@ -7,7 +7,6 @@ role:
 year: 2020
 type:
   - School Project
-link: https://timotheedurand.fr
 techs:
   - WordPress
 ---
