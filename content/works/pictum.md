@@ -8,7 +8,8 @@ year: 2020
 type:
   - School Project
 techs:
-  - WordPress
+  - VueJs
+  - Laravel
 ---
 
 ### Pitch
