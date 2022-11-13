@@ -37,7 +37,6 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: yarn
 
-
       - name: Generate static site 🎡
         run: yarn generate
 

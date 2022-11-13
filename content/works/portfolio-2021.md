@@ -1,11 +1,11 @@
 ---
 title: Portfolio 2021
-subtitle: Personal Project 
+subtitle: Personal Project
 thumbnail: /project-images/portfolio-2021.jpg
 role:
   - Web developper
 year: 2021
-link : https://portfolio.timotheedurand.fr/
+link: https://portfolio.timotheedurand.fr/
 type:
   - School Project
 techs:
@@ -16,7 +16,7 @@ techs:
 
 ### Pitch
 
-The 4th semester project of MMI was to make our personal portfolio... so here is mine. I like it but I wanted something new 
+The 4th semester project of MMI was to make our personal portfolio... so here is mine. I like it but I wanted something new
 so I decided to remake it in Nuxt with a new design and some new features.
 
 ### Techs

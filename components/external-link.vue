@@ -2,7 +2,7 @@
   <a
     :href="href === '' ? false : href"
     :target="target"
-    :rel="target!== '' ? 'noopener noreferrer' : ''"
+    :rel="target !== '' ? 'noopener noreferrer' : ''"
     :class="{ 'external-link': true, 'external-link_social': isSocial }"
   >
     <my-text tag="span" :type="type" class="external-link--text"
@@ -20,7 +20,7 @@ export default {
   props: {
     href: {
       type: String,
-      default : ""
+      default: '',
     },
     isSocial: {
       type: Boolean,

@@ -50,7 +50,6 @@ export default {
       this.scene = new Scene()
       this.clock = new Clock()
 
-
       this.camera = new PerspectiveCamera(
         60,
         this.height / this.width,

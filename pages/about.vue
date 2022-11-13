@@ -51,20 +51,20 @@
 
 <script>
 import ExternalLink from '../components/external-link.vue'
-import { siteName } from "../config/index.js";
+import { siteName } from '../config/index.js'
 export default {
   scrollToTop: true,
   components: { ExternalLink },
   data() {
     return {
-      title: "About | " + siteName,
-    };
+      title: 'About | ' + siteName,
+    }
   },
   head() {
     return {
-      title: this.title
+      title: this.title,
     }
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>

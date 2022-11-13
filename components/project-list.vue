@@ -9,7 +9,9 @@
     >
       <my-image :image-url="project.thumbnail" class="project--thumbnail" />
       <div class="project--text">
-        <my-text class="project--title" type="medium-title" tag="h3">{{project.title}}</my-text>
+        <my-text class="project--title" type="medium-title" tag="h3">{{
+          project.title
+        }}</my-text>
         <div class="project--techs">
           <my-text
             class="project--techs--item"
@@ -19,11 +21,7 @@
           >
         </div>
       </div>
-      <my-button
-        :to="project.path"
-        class="project--link"
-        text="About it"
-      />
+      <my-button :to="project.path" class="project--link" text="About it" />
     </div>
   </div>
 </template>

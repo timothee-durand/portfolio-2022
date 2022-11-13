@@ -8,7 +8,8 @@
         tag="h1"
         type="big-title"
         class="hero-title"
-        text="Timothée Durand <br/> French Web Developer"/>
+        text="Timothée Durand <br/> French Web Developer"
+      />
       <client-only>
         <svg-background :form-proba="5" />
       </client-only>
@@ -20,8 +21,7 @@
 </template>
 
 <script>
-import { worksDir } from "../config";
-
+import { worksDir } from '../config'
 
 export default {
   scrollToTop: true,
@@ -30,7 +30,7 @@ export default {
     return {
       projectList,
     }
-  }
+  },
 }
 </script>
 <style lang="scss">
@@ -42,7 +42,7 @@ export default {
 }
 
 .hero-title {
-  grid-row: 2/3 ;
+  grid-row: 2/3;
   line-height: 1.2;
 }
 </style>

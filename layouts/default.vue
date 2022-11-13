@@ -49,7 +49,6 @@ export default {
     }
   },
   methods: {
-
     leave(el, done) {
       try {
         const lastLinkClicked =
@@ -66,7 +65,12 @@ export default {
         let factor
 
         if (!this.isDefaultTransition) {
-          factor = (Math.sqrt(Math.pow(window.innerWidth, 2) + Math.pow(window.innerHeight, 2)) / width) * 3
+          factor =
+            (Math.sqrt(
+              Math.pow(window.innerWidth, 2) + Math.pow(window.innerHeight, 2)
+            ) /
+              width) *
+            3
 
           if (
             lastLinkClicked &&

@@ -3,13 +3,13 @@ title: Perfect Room
 subtitle: Collective Project - Three Js Experience
 thumbnail: /project-images/perfect-room.jpg
 role:
-- Web developper
+  - Web developper
 year: 2021
 link: https://timotheedurand.fr/projets/perfect-room-threejs/
 type:
-- School Project
+  - School Project
 techs:
-- ThreeJS
+  - ThreeJS
 ---
 
 ### Pitch

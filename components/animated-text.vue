@@ -5,47 +5,51 @@
     :color="color"
     :class="`animated-heading ${isInit ? 'is-init' : ''}`"
   >
-    <span v-for="(span,i) in textSpans" :key="'span-' + i" class="word-container">
-      <span :style="`--a-delay:${i};`">{{span}}</span>
+    <span
+      v-for="(span, i) in textSpans"
+      :key="'span-' + i"
+      class="word-container"
+    >
+      <span :style="`--a-delay:${i};`">{{ span }}</span>
     </span>
   </my-text>
 </template>
 <script>
 export default {
-  name: "AnimatedText",
+  name: 'AnimatedText',
   props: {
     text: {
       type: String,
-      default: "Text"
+      default: 'Text',
     },
     tag: {
       type: String,
-      default: "p"
+      default: 'p',
     },
     type: {
       type: String,
-      default: "default"
+      default: 'default',
     },
     color: {
       type: String,
-      default: "greys-black"
-    }
+      default: 'greys-black',
+    },
   },
   data() {
     return {
-      isInit: false
-    };
+      isInit: false,
+    }
   },
   computed: {
     textSpans() {
-      return this.text.split("<br/>");
-    }
+      return this.text.split('<br/>')
+    },
   },
   mounted() {
     this.isInit = true
   },
-  methods: {}
-};
+  methods: {},
+}
 </script>
 <style scoped lang="scss">
 .animated-heading {
@@ -57,7 +61,8 @@ export default {
 
     > span {
       display: inline-block;
-      animation: hide-in cubic-bezier(0.39, 0.58, 0.57, 1) 400ms backwards paused;
+      animation: hide-in cubic-bezier(0.39, 0.58, 0.57, 1) 400ms backwards
+        paused;
       animation-delay: calc(var(--a-delay, 0) * 400ms + 300ms);
     }
   }

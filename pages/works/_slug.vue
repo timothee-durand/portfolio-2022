@@ -41,7 +41,7 @@
 </template>
 <script>
 import ExternalLink from '../../components/external-link.vue'
-import { siteName, worksDir } from "../../config/index.js";
+import { siteName, worksDir } from '../../config/index.js'
 export default {
   name: 'SingleProject',
   components: { ExternalLink },
@@ -53,11 +53,11 @@ export default {
     }
   },
   scrollToTop: true,
-  head()  {
+  head() {
     return {
-      title: this.content.title + " | " + siteName,
+      title: this.content.title + ' | ' + siteName,
     }
-  }
+  },
 }
 </script>
 <style lang="scss">

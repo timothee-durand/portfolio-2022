@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import { worksDir } from "../../config";
+import { worksDir } from '../../config'
 
 export default {
   data() {

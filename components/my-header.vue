@@ -11,7 +11,7 @@
         no-target
         @click.native="copyContact"
         class="contact-link"
-      >Get in touch
+        >Get in touch
 
         <div class="popover" ref="popover">
           <p>{{ msg }}</p>
@@ -21,48 +21,47 @@
   </header>
 </template>
 <script>
-import { contactMail } from "../config/index.js";
-import anime from "animejs";
+import { contactMail } from '../config/index.js'
+import anime from 'animejs'
 
 export default {
-  name: "MyHeader",
+  name: 'MyHeader',
   data() {
     return {
-      msg: "Email copied!"
-    };
+      msg: 'Email copied!',
+    }
   },
   methods: {
     async copyContact() {
       try {
-        await this.$copyText(contactMail);
-        this.msg = "Email copied!";
+        await this.$copyText(contactMail)
+        this.msg = 'Email copied!'
       } catch (e) {
-        this.msg = "Error :" + e.message;
+        this.msg = 'Error :' + e.message
       } finally {
         const timeline = anime.timeline()
         timeline.add({
-          targets : this.$refs.popover,
-          scale : 1,
+          targets: this.$refs.popover,
+          scale: 1,
           // translateX : '-50%',
           // translateY : '-50%',
-          rotate : '-10deg'
+          rotate: '-10deg',
         })
         timeline.add({
-          delay : 300,
-          targets : this.$refs.popover,
-          scale : 0,
+          delay: 300,
+          targets: this.$refs.popover,
+          scale: 0,
           // translateX : '-50%',
           // translateY : '-50%'
-          rotate : '0',
-          onComplete : () => {
+          rotate: '0',
+          onComplete: () => {
             this.msg = ''
-          }
+          },
         })
-
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
 <style lang="scss">
 .header {
@@ -113,6 +112,4 @@ export default {
     transform-origin: center center;
   }
 }
-
-
 </style>
