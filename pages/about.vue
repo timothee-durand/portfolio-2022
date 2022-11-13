@@ -9,38 +9,42 @@
         I’m Timothée DURAND, a <strong>french web developer</strong> in
         formation. I love to try new things, learn new technologies and make
         stuff with it ! I graduated from
-        <external-link href="http://mmimontbeliard.com/" target="_blank"
-          >MMI Montbéliard</external-link
-        >
-        and I am currently a work-study student between
-        <external-link href="https://hetic.net" target="_blank"
-          >Hetic</external-link
-        >
+        <external-link href="http://mmimontbeliard.com/" target="_blank">
+          MMI Montbéliard
+        </external-link> and
+        <external-link href="https://hetic.net" target="_blank">
+        Hetic
+       </external-link>. <br/>
+        Until 2024 I am a work-study student in master between
+        <external-link href="https://iim.fr" target="_blank">
+          IIM
+        </external-link>
         and
-        <external-link href="https://ubisoft.com" target="_blank"
-          >Ubisoft</external-link
-        >.
+        <external-link href="https://digitevent.com" target="_blank">
+          Digitevent
+        </external-link>.
       </my-text>
       <div class="u--d-flex socials-link-container">
         <external-link
           is-social
           href="https://www.linkedin.com/in/timothee-durand/"
           type="medium-title"
-          >Linkedin</external-link
-        >
+          >
+          Linkedin
+        </external-link>
         <external-link
           is-social
           href="https://github.com/timothee-durand/"
-          type="medium-title"
-          >Github</external-link
-        >
+          type="medium-title">
+          Github
+        </external-link>
         <external-link
           is-social
           href="mailto:contact@timotheedurand.fr"
           no-target
-          type="medium-title"
-          >Email</external-link
-        >
+          type="medium-title">
+          Email
+        </external-link>
       </div>
       <client-only>
         <svg-background :form-proba="5" />
