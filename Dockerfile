@@ -1,6 +1,6 @@
-FROM node:lts-alpine AS builder
+FROM node:16-alpine AS builder
 WORKDIR /app
-COPY package*.json ./
+COPY package*.json yarn.lock ./
 RUN yarn install
 COPY . .
 RUN yarn generate
