@@ -1,15 +1,11 @@
 services:
   portfolio:
     image: ghcr.io/timothee-durand/portfolio-2022:main
-    hostname: timotheedurand.fr
-    deploy:
-      mode: replicated
-      replicas: 1
-      labels:
-        - traefik.enable=true
-        - traefik.http.routers.portfolio.rule=Host(`timotheedurand.fr`)
-        - traefik.http.services.portfolio.loadbalancer.server.port=80
-        - traefik.http.middlewares.cache.headers.customrequestheaders.Cache-Control=public, max-age=31536000
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.portfolio.rule=Host(`timotheedurand.fr`)
+      - traefik.http.services.portfolio.loadbalancer.server.port=80
+      - traefik.http.middlewares.cache.headers.customrequestheaders.Cache-Control=public, max-age=31536000
     restart: always
     networks:
       - vps
