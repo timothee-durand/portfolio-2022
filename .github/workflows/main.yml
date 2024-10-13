@@ -65,6 +65,6 @@ jobs:
           scp docker-stack.yml ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ vars.SSH_PATH }}/docker-compose.yml
       - name: Deploy to production
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ vars.SSH_PATH }} && docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} && docker compose up -d"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ vars.SSH_PATH }} && docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} && docker compose pull && docker compose up -d"
 
 
