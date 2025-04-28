@@ -62,7 +62,7 @@ jobs:
           ssh-keyscan -p ${{vars.SSH_PORT }} -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
       - name: Copy stack and env file to production
         run: |
-          scp docker-stack.yml -P ${{vars.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ vars.SSH_PATH }}/docker-compose.yml
+          scp -P ${{vars.SSH_PORT }} docker-stack.yml ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ vars.SSH_PATH }}/docker-compose.yml
       - name: Deploy to production
         run: |
           ssh -p ${{vars.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ vars.SSH_PATH }} && docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} && docker compose pull && docker compose up -d"
