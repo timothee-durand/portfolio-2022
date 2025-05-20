@@ -64,9 +64,18 @@ export default {
         theme_color: '#efcb68',
       },
     ],
+    'vue-plausible'
   ],
 
-  // PWA module configuration: https://go.nuxtjs.dev/pwa
+  plausible: {
+    domain: 'timotheedurand.fr',
+    autoTrack: true,
+    trackLocalhost: false,
+    trackOnBeforeRouteLeave: true,
+    apiHost:'https://analytics.timotheedurand.fr',
+  },
+
+    // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     meta: {
       name: 'Timothée DURAND | Portfolio',
