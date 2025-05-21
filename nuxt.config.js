@@ -72,7 +72,7 @@ export default {
     autoTrack: true,
     trackLocalhost: false,
     trackOnBeforeRouteLeave: true,
-    apiHost:'https://analytics.timotheedurand.fr',
+    apiHost:'https://poseidon.timotheedurand.fr',
   },
 
     // PWA module configuration: https://go.nuxtjs.dev/pwa
